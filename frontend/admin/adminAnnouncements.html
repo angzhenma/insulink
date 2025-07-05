@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Manage Announcements</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>📢 Post Announcement</h2>
+
+    <form id="announcement-form">
+      <input type="text" id="title" placeholder="Title" required />
+      <textarea id="body" placeholder="Announcement body" rows="4" required></textarea>
+      <button type="submit">Publish</button>
+      <p id="message"></p>
+    </form>
+
+    <hr />
+
+    <h3>🗂 Existing Announcements</h3>
+    <ul id="announcement-list"></ul>
+
+    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  </div>
+
+  <script src="adminAnnouncements.js"></script>
+</body>
+</html>
