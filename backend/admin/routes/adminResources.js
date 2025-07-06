@@ -3,7 +3,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const { v4: uuidv4 } = require('uuid');
 const { s3, dynamo } = require('../aws-config');
-const verifyAdmin = require('../../middleware/authMiddleware');
+const verifyAdmin = require('../middleware/authMiddleware');
 const router = express.Router();
 
 const upload = multer({
