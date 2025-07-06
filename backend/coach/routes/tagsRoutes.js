@@ -1,0 +1,28 @@
+const express = require('express');
+const router = express.Router();
+const dynamoDB = require('../aws-config');
+
+const TABLE_NAME = 'CoachTags';
+
+// Create tag
+router.post('/', async (req, res) => {
+    const { tagId, tagName } = req.body;
+
+    const params = {
+        TableName: TABLE_NAME,
+        Item: {
+            tagId,    // Partition key
+            tagName,
+        },
+    };
+
+    try {
+        await dynamoDB.put(params).promise();
+        res.status(201).json({ message: 'Tag created successfully' });
+    } catch (error) {
+        console.error('Error creating tag:', error);
+        res.status(500).json({ error: 'Could not create tag' });
+    }
+});
+
+module.exports = router;
