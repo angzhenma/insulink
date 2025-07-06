@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coach – Bookmarks</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🔖 Add Bookmark</h2>
+    <form id="bookmark-form">
+      <input type="text" id="bookmarkId" placeholder="Bookmark ID" required />
+      <input type="text" id="title" placeholder="Title" required />
+      <input type="text" id="url" placeholder="URL" required />
+      <input type="text" id="userId" placeholder="Coach User ID" required />
+      <button type="submit">Add Bookmark</button>
+      <p id="message-el"></p>
+    </form>
+    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  </div>
+  <script src="coachBookmarks.js"></script>
+</body>
+</html>
