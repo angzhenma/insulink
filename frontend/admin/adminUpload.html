@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Upload Educational Resource</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>📁 Upload Educational Resource</h2>
+
+    <form id="upload-form" enctype="multipart/form-data">
+      <input type="text" id="title" placeholder="Resource Title" required />
+      <input type="text" id="description" placeholder="Description" required />
+      <input type="file" id="file" required />
+      <button type="submit">Upload</button>
+      <p id="upload-message"></p>
+    </form>
+
+    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  </div>
+
+  <script src="adminUpload.js"></script>
+</body>
+</html>
