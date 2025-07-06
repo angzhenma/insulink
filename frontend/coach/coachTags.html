@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coach – Create Tag</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🏷️ Create Tag</h2>
+    <form id="tag-form">
+      <input type="text" id="tagId" placeholder="Tag ID" required />
+      <input type="text" id="tagName" placeholder="Tag Name" required />
+      <button type="submit">Create Tag</button>
+      <p id="message-el"></p>
+    </form>
+    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  </div>
+  <script src="coachTags.js"></script>
+</body>
+</html>
