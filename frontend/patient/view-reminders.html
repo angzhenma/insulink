@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reminders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .reminder-form {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="time"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .reminder-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .reminder-card {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reminder-card span {
+      font-size: 1rem;
+    }
+
+    .actions button {
+      margin-left: 0.5rem;
+      background-color: #dc3545;
+    }
+
+    .actions button.edit {
+      background-color: #ffc107;
+    }
+
+    .error, .success {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Reminders</h1>
+
+  <div class="reminder-form">
+    <label for="reminderMessage">Reminder Message</label>
+    <input type="text" id="reminderMessage" placeholder="e.g., Take meds at 9AM" />
+
+    <label for="reminderTime">Time</label>
+    <input type="time" id="reminderTime" />
+
+    <button onclick="addReminder()">Add Reminder</button>
+    <div class="error" id="error-message"></div>
+    <div class="success" id="success-message"></div>
+  </div>
+
+  <div class="reminder-list" id="reminderList"></div>
+
+  <script>
+    async function fetchReminders() {
+      try {
+        const response = await fetch('http://localhost:5001/api/patient/reminders');
+        const data = await response.json();
+
+        const list = document.getElementById('reminderList');
+        list.innerHTML = '';
+
+        if (data.reminders && data.reminders.length > 0) {
+          data.reminders.forEach(reminder => {
+            const card = document.createElement('div');
+            card.className = 'reminder-card';
+            card.innerHTML = `
+              <div>
+                <span><strong>${reminder.time}</strong> - ${reminder.message}</span>
+              </div>
+              <div class="actions">
+                <button class="edit" onclick='editReminder(${JSON.stringify(reminder)})'>Edit</button>
+                <button onclick="deleteReminder('${reminder.id}')">Delete</button>
+              </div>
+            `;
+            list.appendChild(card);
+          });
+        } else {
+          list.innerHTML = '<p>No reminders set.</p>';
+        }
+      } catch (err) {
+        document.getElementById('error-message').textContent = 'Failed to load reminders.';
+      }
+    }
+
+    async function addReminder() {
+      const message = document.getElementById('reminderMessage').value;
+      const time = document.getElementById('reminderTime').value;
+
+      document.getElementById('error-message').textContent = '';
+      document.getElementById('success-message').textContent = '';
+
+      if (!message || !time) {
+        document.getElementById('error-message').textContent = 'Both fields are required.';
+        return;
+      }
+
+      const res = await fetch('http://localhost:5001/api/patient/reminders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, time })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        document.getElementById('success-message').textContent = 'Reminder added.';
+        document.getElementById('reminderMessage').value = '';
+        document.getElementById('reminderTime').value = '';
+        fetchReminders();
+      } else {
+        document.getElementById('error-message').textContent = data.error || 'Failed to add reminder.';
+      }
+    }
+
+    async function deleteReminder(id) {
+      const res = await fetch(`http://localhost:5001/api/patient/reminders/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        fetchReminders();
+      }
+    }
+
+    function editReminder(reminder) {
+      const newMessage = prompt('Edit message:', reminder.message);
+      const newTime = prompt('Edit time (HH:MM):', reminder.time);
+      if (newMessage && newTime) {
+        fetch(`http://localhost:5001/api/patient/reminders/${reminder.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: newMessage, time: newTime })
+        }).then(res => {
+          if (res.ok) fetchReminders();
+        });
+      }
+    }
+
+    fetchReminders();
+  </script>
+</body>
+</html>

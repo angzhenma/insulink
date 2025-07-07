@@ -1,0 +1,30 @@
+<!-- frontend/patient/log.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log Health Data</title>
+  <link rel="stylesheet" href="./css/log.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Log Health Data</h1>
+    <form id="healthLogForm">
+      <label for="bloodGlucose">Blood Glucose (mmol/L)</label>
+      <input type="text" id="bloodGlucose" name="bloodGlucose" required>
+
+      <label for="foodIntake">Food Intake</label>
+      <textarea id="foodIntake" name="foodIntake" required></textarea>
+
+      <label for="physicalActivity">Physical Activity</label>
+      <textarea id="physicalActivity" name="physicalActivity" required></textarea>
+
+      <button type="submit">Submit Log</button>
+    </form>
+    <div id="responseMessage"></div>
+  </div>
+
+  <script src="./js/log.js"></script>
+</body>
+</html>

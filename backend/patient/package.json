@@ -1,0 +1,20 @@
+{
+  "name": "insulink-patient",
+  "version": "1.0.0",
+  "description": "Patient backend for InsuLink",
+  "main": "patient-app.js",
+  "scripts": {
+    "start": "node patient-app.js"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.2.1",
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwk-to-pem": "^2.0.7",
+    "node-fetch": "^2.6.11"
+  }
+}

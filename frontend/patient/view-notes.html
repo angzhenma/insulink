@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Notes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    textarea {
+      flex: 1;
+      resize: vertical;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .note-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .note-card textarea {
+      width: 100%;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .note-actions {
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+
+    .note-actions button {
+      margin-left: 0.5rem;
+      padding: 0.3rem 0.7rem;
+    }
+
+    .timestamp {
+      font-size: 0.9rem;
+      color: gray;
+    }
+
+    .error, .success {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Notes</h1>
+
+  <div class="success" id="success-msg"></div>
+  <div class="error" id="error-msg"></div>
+
+  <form id="note-form">
+    <textarea id="note-input" rows="3" placeholder="Write your note..."></textarea>
+    <button type="submit">Add</button>
+  </form>
+
+  <div id="notes-container"></div>
+
+  <script>
+    const apiBase = 'http://localhost:5001/api/patient/notes';
+    const container = document.getElementById('notes-container');
+    const noteForm = document.getElementById('note-form');
+    const input = document.getElementById('note-input');
+    const errorMsg = document.getElementById('error-msg');
+    const successMsg = document.getElementById('success-msg');
+
+    async function fetchNotes() {
+      container.innerHTML = '';
+      const res = await fetch(apiBase);
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorMsg.textContent = data.error || 'Failed to load notes!';
+        return;
+      }
+
+      if (data.notes && data.notes.length > 0) {
+        data.notes.forEach(note => renderNote(note));
+      } else {
+        container.innerHTML = '<p style="text-align:center;">No notes found.</p>';
+      }
+    }
+
+    function renderNote(note) {
+      const card = document.createElement('div');
+      card.className = 'note-card';
+      card.dataset.id = note.id;
+
+      const timestamp = new Date(note.timestamp).toLocaleString();
+
+      card.innerHTML = `
+        <div class="timestamp">Created: ${timestamp}</div>
+        <textarea rows="3" disabled>${note.content}</textarea>
+        <div class="note-actions">
+          <button onclick="editNote(this)">Edit</button>
+          <button onclick="deleteNote('${note.id}')">Delete</button>
+        </div>
+      `;
+      container.appendChild(card);
+    }
+
+    noteForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const content = input.value.trim();
+      errorMsg.textContent = '';
+      successMsg.textContent = '';
+
+      if (!content) {
+        errorMsg.textContent = 'Note cannot be empty!';
+        return;
+      }
+
+      const res = await fetch(apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        errorMsg.textContent = data.error || 'Failed to add note!';
+        return;
+      }
+
+      input.value = '';
+      successMsg.textContent = 'Note added successfully!';
+      fetchNotes();
+    });
+
+    async function deleteNote(id) {
+      const res = await fetch(`${apiBase}/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (res.ok) {
+        successMsg.textContent = 'Note deleted!';
+        fetchNotes();
+      } else {
+        errorMsg.textContent = 'Failed to delete note!';
+      }
+    }
+
+    function editNote(btn) {
+      const card = btn.closest('.note-card');
+      const textarea = card.querySelector('textarea');
+      const id = card.dataset.id;
+
+      if (btn.textContent === 'Edit') {
+        textarea.disabled = false;
+        textarea.focus();
+        btn.textContent = 'Save';
+      } else {
+        const updatedContent = textarea.value.trim();
+        if (!updatedContent) {
+          errorMsg.textContent = 'Note content is empty! Add to create a Note';
+          return;
+        }
+
+        fetch(`${apiBase}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: updatedContent })
+        })
+        .then(res => {
+          if (res.ok) {
+            textarea.disabled = true;
+            btn.textContent = 'Edit';
+            successMsg.textContent = 'Note updated!';
+          } else {
+            errorMsg.textContent = 'Failed to update note!';
+          }
+        });
+      }
+    }
+
+    fetchNotes();
+  </script>
+
+</body>
+</html>

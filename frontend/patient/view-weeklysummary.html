@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weekly Health Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f3f5;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .summary-card {
+      background-color: #fff;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      width: 60%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .summary-item {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Weekly Health Summary</h1>
+
+  <div class="summary-card" id="summary-card" style="display:none;">
+    <div class="summary-item"><span class="label">Average Glucose:</span> <span id="avg-glucose"></span> mmol/L</div>
+    <div class="summary-item"><span class="label">Activity Sessions:</span> <span id="activity-sessions"></span></div>
+    <div class="summary-item"><span class="label">Meals Logged:</span> <span id="meals-logged"></span></div>
+    <div class="summary-item"><span class="label">Total Logs:</span> <span id="total-logs"></span></div>
+  </div>
+
+  <div class="error" id="error-message"></div>
+
+  <script>
+    async function fetchSummary() {
+      try {
+        const response = await fetch('http://localhost:5001/api/patient/summary');
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Unable to fetch summary.');
+        }
+
+        if (data.summary) {
+          document.getElementById('summary-card').style.display = 'block';
+          document.getElementById('avg-glucose').textContent = data.summary.averageGlucose;
+          document.getElementById('activity-sessions').textContent = data.summary.activitySessions;
+          document.getElementById('meals-logged').textContent = data.summary.mealsLogged;
+          document.getElementById('total-logs').textContent = data.summary.totalLogs;
+        } else {
+          document.getElementById('error-message').textContent = data.message || 'No data available.';
+        }
+      } catch (err) {
+        document.getElementById('error-message').textContent = err.message;
+      }
+    }
+
+    fetchSummary();
+  </script>
+
+</body>
+</html>

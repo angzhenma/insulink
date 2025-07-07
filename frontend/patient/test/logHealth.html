@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Log Health Data</title>
+</head>
+<body>
+  <h2>Log Health Data (Patient)</h2>
+  <form id="logForm">
+    <label>Blood Glucose:</label><br />
+    <input type="text" id="bloodGlucose" required /><br /><br />
+
+    <label>Food Intake:</label><br />
+    <textarea id="foodIntake" required></textarea><br /><br />
+
+    <label>Physical Activity:</label><br />
+    <textarea id="physicalActivity" required></textarea><br /><br />
+
+    <button type="submit">Submit Log</button>
+  </form>
+
+  <p id="responseMsg"></p>
+
+  <script>
+    const form = document.getElementById('logForm');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const log = {
+        bloodGlucose: document.getElementById('bloodGlucose').value,
+        foodIntake: document.getElementById('foodIntake').value,
+        physicalActivity: document.getElementById('physicalActivity').value,
+      };
+
+      try {
+        const res = await fetch('http://localhost:5001/api/patient/log', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(log),
+        });
+
+        const data = await res.json();
+        document.getElementById('responseMsg').innerText = data.message;
+      } catch (err) {
+        document.getElementById('responseMsg').innerText = 'Error: Failed to send log.';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
