@@ -1,76 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Patient Feedback</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background-color: #f9f9f9;
-    }
-    h1 {
-      text-align: center;
-    }
-    .feedback-card {
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem auto;
-      width: 80%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .feedback-card h3 {
-      margin: 0 0 0.5rem;
-    }
-    .error {
-      color: red;
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Patient – My Feedback</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
 </head>
 <body>
 
-  <h1>My Feedback</h1>
-  <div id="feedback-container"></div>
-  <div id="error-message" class="error"></div>
+  <div class="container">
+    <h2>My Feedback</h2>
+    <div id="feedback-container"></div>
+    <div id="error-message" class="error"></div>
+    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+  </div>
 
-  <script>
-    async function fetchFeedback() {
-      try {
-        const response = await fetch('http://localhost:5001/api/patient/feedback');
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch feedback.');
-        }
-
-        const container = document.getElementById('feedback-container');
-        container.innerHTML = '';
-
-        if (data.feedback && data.feedback.length > 0) {
-          data.feedback.forEach(fb => {
-            const card = document.createElement('div');
-            card.className = 'feedback-card';
-            card.innerHTML = `
-              <h3>Feedback ID: ${fb.feedbackId}</h3>
-              <p><strong>Message:</strong> ${fb.message}</p>
-              <p><strong>Coach ID:</strong> ${fb.userId}</p>
-            `;
-            container.appendChild(card);
-          });
-        } else {
-          container.innerHTML = '<p>No feedback found.</p>';
-        }
-      } catch (err) {
-        document.getElementById('error-message').textContent = err.message;
-      }
-    }
-
-    // Run on page load
-    fetchFeedback();
-  </script>
-
+  <script src="js/view-patientfeedback.js"></script>
 </body>
 </html>

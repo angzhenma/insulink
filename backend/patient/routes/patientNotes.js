@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/noteController');
-const notesDB = {}; // Temporary in-memory store for testing only
+
 
 // POST - Add new personal note
 router.post('/note', controller.addNote);

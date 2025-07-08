@@ -3,126 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>Patient Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f8f9fa;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      background-color: #007bff;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    #logoutBtn {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #logoutBtn:hover {
-      background-color: #c82333;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 2rem;
-      color: #343a40;
-    }
-
-    .dashboard-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-
-    .card {
-      background-color: #ffffff;
-      border: 1px solid #dee2e6;
-      border-radius: 12px;
-      padding: 2rem;
-      width: 250px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .card button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <link rel="stylesheet" href="css/patient.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
-  <!-- Top Bar with Logout Button -->
-  <div class="top-bar">
-    <button id="logoutBtn">Logout</button>
+  <div class="container dashboard-container">
+
+    <div class="logout-wrapper">
+      <button onclick="logout()" class="logout-compact">Logout</button>
+    </div>
+
+    <h2>Patient Dashboard</h2>
+
+    <div class="dashboard-buttons">  
+      <a href="submit-healthlog.html" class="button">Log Daily Health</a>
+      <a href="view-weeklysummary.html" class="button">Weekly Summary</a>
+      <a href="view-notes.html" class="button">My Notes</a>
+      <a href="view-reminders.html" class="button">Reminders</a>
+      <a href="view-patientfeedback.html" class="button">View Feedback</a>
+    </div>
+
   </div>
 
-  <h1>Patient Dashboard</h1>
-
-  <!-- Main Feature Cards -->
-  <div class="dashboard-container">
-    <div class="card">
-      <h3>Log Daily Health</h3>
-      <button onclick="location.href='submit-healthlog.html'">Open</button>
-    </div>
-
-    <div class="card">
-      <h3>View Weekly Summary</h3>
-      <button onclick="location.href='view-weeklysummary.html'">Open</button>
-    </div>
-
-    <div class="card">
-      <h3>My Notes</h3>
-      <button onclick="location.href='view-notes.html'">Open</button>
-    </div>
-
-    <div class="card">
-      <h3>Reminders</h3>
-      <button onclick="location.href='view-reminders.html'">Open</button>
-    </div>
-
-    <div class="card">
-      <h3>View Feedback</h3>
-      <button onclick="location.href='view-patientfeedback.html'">Open</button>
-    </div>
-  </div>
-
-  <!-- Logout Script -->
-  <script>
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('token'); // or sessionStorage
-      window.location.href = 'login.html'; // Adjust as needed
-    });
-  </script>
-
+  <script src="js/patientDashboard.js"></script>
 </body>
 </html>
