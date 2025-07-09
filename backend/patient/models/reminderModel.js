@@ -1,4 +1,4 @@
-const { dynamo } = require('../../aws-config');
+const { dynamo } = require('..  /aws-config');
 const { v4: uuidv4 } = require('uuid');
 
 const TABLE_NAME = 'PatientReminders';

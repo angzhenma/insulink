@@ -1,6 +1,7 @@
+
 const express = require('express');
 const router = express.Router();
-const { verifyPatient } = require('../middleware/mockPatientAuth');
+const { verifyPatient } = require('../middleware/authMiddleware');
 const controller = require('../controllers/feedbackController');
 
 // Protect all routes

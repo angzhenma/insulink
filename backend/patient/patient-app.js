@@ -6,7 +6,6 @@ const patientAuthRoutes = require('./routes/patientAuth');
 const patientLogsRoutes = require('./routes/patientLogs');
 const patientNotesRoutes = require('./routes/patientNotes');
 const patientRemindersRoutes = require('./routes/patientReminders');
-const feedbackRoutes = require('./routes/feedbackRoutes');
 const patientFeedbackRoutes = require('./routes/patientFeedbackRoutes');
 
 
@@ -21,7 +20,7 @@ app.use('/api/patient', patientAuthRoutes);
 app.use('/api/patient', patientLogsRoutes);
 app.use('/api/patient', patientNotesRoutes);
 app.use('/api/patient', patientRemindersRoutes);
-app.use('/api/patient/feedback', feedbackRoutes);
+app.use('/api/patient', patientFeedbackRoutes)
 
 // Default route
 app.get('/', (req, res) => {
