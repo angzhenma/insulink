@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../middleware/verifyToken');
-const controller = require('../controllers/patientLogsController');
+const verifyPatient = require('../middleware/mockPatientAuth');
+const {
+  logHealthData,
+  getHealthLogs,
+  getWeeklySummary
+} = require('../controllers/patientLogsController');
 
-// Use functions from controller object
-router.post('/log', controller.logHealthData);
-router.get('/log', controller.getHealthLogs);
-router.get('/summary', controller.getWeeklySummary);
+router.use(verifyPatient);
+
+router.post('/log', logHealthData);
+router.get('/log', getHealthLogs);
+router.get('/summary', getWeeklySummary);
 
 module.exports = router;

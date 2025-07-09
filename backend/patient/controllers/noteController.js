@@ -1,10 +1,8 @@
-// controllers/noteController.js
-
 const NoteModel = require('../models/noteModel');
 
 const addNote = async (req, res) => {
   try {
-    const userId = req.user?.sub || 'test-user-123';
+    const userId = req.user?.sub;
     const { content } = req.body;
 
     if (!content) {
@@ -21,13 +19,53 @@ const addNote = async (req, res) => {
 
 const getNotes = async (req, res) => {
   try {
-    const userId = req.user?.sub || 'test-user-123';
+    const userId = req.user?.sub;
     const notes = await NoteModel.getNotes(userId);
-    res.status(200).json({ message: 'Notes retrieved.', notes });
+    res.status(200).json({ notes });
   } catch (err) {
-    console.error('Fetch notes error:', err);
+    console.error('Get notes error:', err);
     res.status(500).json({ error: 'Failed to retrieve notes.' });
   }
 };
 
-module.exports = { addNote, getNotes };
+const updateNote = async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const { id } = req.params;
+    const { content } = req.body;
+
+    const updated = await NoteModel.updateNote(userId, id, content);
+    if (!updated) {
+      return res.status(404).json({ error: 'Note not found or unauthorized.' });
+    }
+
+    res.status(200).json({ message: 'Note updated.', note: updated });
+  } catch (err) {
+    console.error('Update note error:', err);
+    res.status(500).json({ error: 'Failed to update note.' });
+  }
+};
+
+const deleteNote = async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const { id } = req.params;
+
+    const deleted = await NoteModel.deleteNote(userId, id);
+    if (!deleted) {
+      return res.status(403).json({ error: 'Unauthorized or not found.' });
+    }
+
+    res.status(200).json({ message: 'Note deleted.' });
+  } catch (err) {
+    console.error('Delete note error:', err);
+    res.status(500).json({ error: 'Failed to delete note.' });
+  }
+};
+
+module.exports = {
+  addNote,
+  getNotes,
+  updateNote,
+  deleteNote,
+};

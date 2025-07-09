@@ -1,3 +1,7 @@
+
+/**
+ * MOCK LOGIN CONTROLLER FOR LOCAL TESTING ONLY
+ */
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {

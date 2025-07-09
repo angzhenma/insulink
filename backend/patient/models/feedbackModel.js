@@ -1,13 +1,10 @@
-// models/feedbackModel.js
-const AWS = require('aws-sdk');
-require('dotenv').config();
-
-// Configure AWS
-AWS.config.update({ region: process.env.AWS_REGION });
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const { dynamo } = require('../../aws-config'); // use shared SDK instance
 
 const TABLE_NAME = 'CoachFeedback';
 
+/**
+ * Retrieves all feedback entries for a patient.
+ */
 const getFeedbackForPatient = async (patientId) => {
   const params = {
     TableName: TABLE_NAME,
@@ -17,7 +14,7 @@ const getFeedbackForPatient = async (patientId) => {
     },
   };
 
-  const result = await dynamoDB.scan(params).promise();
+  const result = await dynamo.scan(params).promise();
   return result.Items || [];
 };
 

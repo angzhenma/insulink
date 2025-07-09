@@ -1,9 +1,12 @@
-// routes/patientFeedbackRoutes.js
 const express = require('express');
 const router = express.Router();
-// const verifyToken = require('../middleware/verifyToken'); // optional for local testing
+const { verifyPatient } = require('../middleware/mockPatientAuth');
 const controller = require('../controllers/feedbackController');
 
-router.get('/', controller.getFeedback); // for local test, skip verifyToken
+// Protect all routes
+router.use(verifyPatient);
+
+// GET - Retrieve feedback for the patient
+router.get('/', controller.getFeedback);
 
 module.exports = router;

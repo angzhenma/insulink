@@ -1,9 +1,9 @@
-// controllers/feedbackController.js
-const FeedbackModel = require('../models/feedbackModel');
+const FeedbackModel = require('../models/patientFeedbackModel');
 
 const getFeedback = async (req, res) => {
   try {
-    const patientId = req.user?.sub || 'test-user-123'; // fallback for local testing
+    const patientId = req.user.sub;
+
     const feedback = await FeedbackModel.getFeedbackForPatient(patientId);
 
     if (!feedback.length) {

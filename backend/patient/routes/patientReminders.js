@@ -1,19 +1,13 @@
-// routes/patientReminders.js
-
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/reminderController');
+const { verifyPatient } = require('../middleware/authMiddleware');
+const reminderController = require('../controllers/reminderController');
 
-// CREATE - Add reminder
-router.post('/reminders', controller.addReminder);
+router.use(verifyPatient);
 
-// READ - Get all reminders
-router.get('/reminders', controller.getReminders);
-
-// UPDATE - Edit reminder
-router.put('/reminders/:id', controller.updateReminder);
-
-// DELETE - Remove reminder
-router.delete('/reminders/:id', controller.deleteReminder);
+router.post('/reminders', reminderController.addReminder);
+router.get('/reminders', reminderController.getReminders);
+router.put('/reminders/:id', reminderController.updateReminder);
+router.delete('/reminders/:id', reminderController.deleteReminder);
 
 module.exports = router;
