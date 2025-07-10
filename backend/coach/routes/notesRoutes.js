@@ -6,13 +6,13 @@ const TABLE_NAME = 'CoachCaseNotes';
 
 // Create a note with optional tags
 router.post('/', async (req, res) => {
-    const { noteId, userId, content, patientId, tagIds } = req.body;
+    const { noteId, coachId, content, patientId, tagIds } = req.body;
 
     const params = {
         TableName: TABLE_NAME,
         Item: {
             noteId,             // Partition key
-            userId,             // Sort key (or coach ID)
+            coachId,             // Sort key (or coach ID)
             content,
             patientId,
             tagIds: tagIds || []
