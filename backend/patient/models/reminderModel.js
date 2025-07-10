@@ -35,20 +35,30 @@ const getReminders = async (userId) => {
 };
 
 const updateReminder = async (userId, id, title, time) => {
-  const params = {
+  const getParams = {
     TableName: TABLE_NAME,
     Key: { id },
-    UpdateExpression: 'SET title = :t, time = :tm',
-    ConditionExpression: 'patientId = :pid',
+  };
+
+  const existing = await dynamo.get(getParams).promise();
+  if (!existing.Item || existing.Item.patientId !== userId) return null;
+
+  const updateParams = {
+    TableName: TABLE_NAME,
+    Key: { id },
+    UpdateExpression: 'SET title = :t, #tm = :tm',
+    ExpressionAttributeNames: {
+      '#tm' : 'time',
+    },
+
     ExpressionAttributeValues: {
       ':t': title,
       ':tm': time,
-      ':pid': userId,
     },
     ReturnValues: 'ALL_NEW',
   };
 
-  const result = await dynamo.update(params).promise();
+  const result = await dynamo.update(updateParams).promise();
   return result.Attributes;
 };
 
