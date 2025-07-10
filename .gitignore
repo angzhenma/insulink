@@ -1,6 +1,7 @@
 # environment variables
 .env
 backend/.env
+backend/admin/.env
 
 # node modules
 **/node_modules
