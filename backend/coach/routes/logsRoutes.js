@@ -4,7 +4,7 @@ const dynamoDB = require('../aws-config');
 
 const PATIENT_LOGS_TABLE = 'PatientLogs';
 
-// Get all patient logs (accessible by coach)
+// Get all patient logs
 router.get('/patient', async (req, res) => {
   const params = {
     TableName: PATIENT_LOGS_TABLE,
