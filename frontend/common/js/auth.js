@@ -3,10 +3,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
+  const API_BASE_URL = 'http://localhost:3000';
+
   const endpoints = {
-    admin: '/api/admin/login',
-    coach: '/api/coach/login',
-    patient: '/api/patient/login'
+    admin: '${API_BASE_URL}/api/admin/login',
+    coach: '${API_BASE_URL}/api/coach/login',
+    patient: '${API_BASE_URL}/api/patient/login'
   };
 
   for (const role in endpoints) {
