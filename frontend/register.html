@@ -2,37 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Register for InsuLink</title>
+  <title>Register – InsuLink</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <div class="app-bar">InsuLink</div>
+  <!-- Top App Bar -->
+  <header class="top-bar">
+    <div class="brand">InsuLink</div>
+  </header>
 
-  <div class="container card">
-    <form id="registerForm">
+  <!-- Register Card -->
+  <main class="login-wrapper">
+    <div class="login-card">
       <h2>Register</h2>
+      <form id="registerForm">
+        <input type="text" id="fullname" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+        <select id="role">
+          <option value="patient">Patient</option>
+          <option value="coach">Coach</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Register</button>
+      </form>
+      <p class="link">Already have an account? <a href="index.html">Login here</a></p>
+    </div>
+  </main>
 
-      <input type="text" id="fullname" placeholder="Full Name" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-
-      <label for="role">Select Role</label>
-      <select id="role" required>
-        <option value="patient">Patient</option>
-        <option value="coach">Coach</option>
-        <option value="admin">Admin</option>
-      </select>
-
-      <button type="submit">Register</button>
-
-      <p>Already have an account? <a href="index.html">Login here</a></p>
-    </form>
-  </div>
-
-  <footer>
-    © 2025 Insulink | <a href="privacy.html">Privacy Policy</a>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 InsuLink | <a href="#">Privacy Policy</a></p>
   </footer>
 
   <script src="js/register.js"></script>
