@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weekly Health Summary</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Weekly Health Summary</h2>
+
+    <div class="summary-card" id="summary-card" style="display: none;">
+      <div class="summary-item"><span class="label">Average Glucose:</span> <span id="avg-glucose"></span> mmol/L</div>
+      <div class="summary-item"><span class="label">Activity Sessions:</span> <span id="activity-sessions"></span></div>
+      <div class="summary-item"><span class="label">Meals Logged:</span> <span id="meals-logged"></span></div>
+      <div class="summary-item"><span class="label">Total Logs:</span> <span id="total-logs"></span></div>
+    </div>
+
+    <div class="error" id="error-message"></div>
+
+    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+  </div>
+
+  <script src="js/view-weeklysummary.js"></script>
+</body>
+</html>

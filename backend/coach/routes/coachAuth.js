@@ -1,39 +1,37 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
+const AWS = require('aws-sdk');
 const router = express.Router();
 
-// Hardcoded coach credentials
-const COACH_CREDENTIALS = {
-  email: 'coach@insulink.com',
-  password: 'coach123',
-  role: 'coach'
-};
+const cognito = new AWS.CognitoIdentityServiceProvider();
 
-// JWT configuration
-const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
-const JWT_EXPIRES_IN = '3h';
+const CLIENT_ID = process.env.COGNITO_CLIENT_ID; // Your App Client ID
+const USER_POOL_ID = process.env.COGNITO_USER_POOL_ID;
 
-// Login endpoint
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  if (email === COACH_CREDENTIALS.email && password === COACH_CREDENTIALS.password) {
-    const token = jwt.sign(
-      {
-        email: COACH_CREDENTIALS.email,
-        role: COACH_CREDENTIALS.role
-      },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN }
-    );
+  const params = {
+    AuthFlow: 'USER_PASSWORD_AUTH',
+    ClientId: CLIENT_ID,
+    AuthParameters: {
+      USERNAME: email,
+      PASSWORD: password,
+    },
+  };
+
+  try {
+    const response = await cognito.initiateAuth(params).promise();
 
     return res.status(200).json({
       message: 'Login successful',
-      token
+      token: response.AuthenticationResult.IdToken,
+      accessToken: response.AuthenticationResult.AccessToken,
+      refreshToken: response.AuthenticationResult.RefreshToken
     });
+  } catch (error) {
+    console.error('Cognito auth error:', error);
+    return res.status(401).json({ error: 'Invalid email or password' });
   }
-
-  return res.status(401).json({ error: 'Invalid email or password' });
 });
 
 module.exports = router;

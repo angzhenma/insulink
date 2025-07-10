@@ -25,4 +25,19 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Get all tags
+router.get('/', async (req, res) => {
+    const params = {
+        TableName: TABLE_NAME,
+    };
+
+    try {
+        const data = await dynamoDB.scan(params).promise();
+        res.status(200).json(data.Items);
+    } catch (error) {
+        console.error('Error fetching tags:', error);
+        res.status(500).json({ error: 'Could not fetch tags' });
+    }
+});
+
 module.exports = router;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient Dashboard</title>
+  <link rel="stylesheet" href="css/patient.css" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <div class="container dashboard-container">
+
+    <div class="logout-wrapper">
+      <button onclick="logout()" class="logout-compact">Logout</button>
+    </div>
+
+    <h2>Patient Dashboard</h2>
+
+    <div class="dashboard-buttons">  
+      <a href="submit-healthlog.html" class="button">Log Daily Health</a>
+      <a href="view-weeklysummary.html" class="button">Weekly Summary</a>
+      <a href="view-notes.html" class="button">My Notes</a>
+      <a href="view-reminders.html" class="button">Reminders</a>
+      <a href="view-patientfeedback.html" class="button">View Feedback</a>
+    </div>
+
+  </div>
+
+  <script src="js/patientDashboard.js"></script>
+</body>
+</html>

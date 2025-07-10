@@ -6,7 +6,8 @@ const TABLE_NAME = 'CoachFeedback';
 
 // Send feedback
 router.post('/', async (req, res) => {
-    const { feedbackId, message, patientId, userId } = req.body;
+    const { feedbackId, message, patientId } = req.body;
+    const userId = req.user.sub; // Get from JWT token instead of body
 
     const params = {
         TableName: TABLE_NAME,

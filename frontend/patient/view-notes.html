@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Health Notes</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>My Personal Health Notes</h2>
+
+    <form id="note-form">
+      <textarea id="note-input" rows="3" placeholder="Write your note..." required></textarea>
+      <button type="submit" class="button">Add Note</button>
+      <p id="message"></p>
+    </form>
+
+    <hr />
+
+    <div id="success-msg" class="success"></div>
+    <div id="error-msg" class="error"></div>
+
+    <h3>Saved Notes</h3>
+    <div id="notes-container"></div>
+
+    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+  </div>
+
+  <script src="js/view-notes.js"></script>
+</body>
+</html>

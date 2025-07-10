@@ -4,17 +4,18 @@ const dynamoDB = require('../aws-config');
 
 const TABLE_NAME = 'CoachCaseNotes';
 
-// Create a note
+// Create a note with optional tags
 router.post('/', async (req, res) => {
-    const { noteId, userId, content, patientId } = req.body;
+    const { noteId, userId, content, patientId, tagIds } = req.body;
 
     const params = {
         TableName: TABLE_NAME,
         Item: {
-            noteId,   // Partition key
-            userId,   // Sort key
+            noteId,             // Partition key
+            userId,             // Sort key (or coach ID)
             content,
             patientId,
+            tagIds: tagIds || []
         },
     };
 

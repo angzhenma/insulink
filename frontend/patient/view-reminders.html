@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient – Reminders</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>My Reminders</h2>
+
+    <div class="reminder-form">
+      <label for="reminderMessage">Reminder Message</label>
+      <input type="text" id="reminderMessage" placeholder="e.g., Take meds at 9AM" />
+
+      <label for="reminderTime">Time</label>
+      <input type="time" id="reminderTime" />
+
+      <button onclick="addReminder()">Add Reminder</button>
+      <div class="error" id="error-message"></div>
+      <div class="success" id="success-message"></div>
+    </div>
+
+    <div class="reminder-list" id="reminderList"></div>
+
+    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+  </div>
+
+  <script src="js/view-reminders.js"></script>
+</body>
+</html>
