@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const { dynamo } = require('../../aws-config');
+const { dynamo } = require('../aws-config');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '3h';
