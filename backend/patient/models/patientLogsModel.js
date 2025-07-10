@@ -1,6 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../aws-config'); // adjust path if needed
-
+const { dynamo } = require('../aws-config'); 
 const TABLE_NAME = 'PatientHealthLogs';
 
 /**

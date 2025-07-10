@@ -1,4 +1,4 @@
-const { dynamo } = require('../../aws-config'); // use shared SDK instance
+const { dynamo } = require('../aws-config'); // use shared SDK instance
 
 const TABLE_NAME = 'CoachFeedback';
 
