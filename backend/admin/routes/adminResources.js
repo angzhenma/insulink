@@ -9,7 +9,7 @@ const router = express.Router();
 const upload = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'insulink-uploads', //process.env.S3_BUCKET_NAME,
+        bucket: 'insulink-uploads',
         acl: 'public-read',
         key: (req, file, cb) => {
             cb(null, `educational/${Date.now()}_${file.originalname}`);
