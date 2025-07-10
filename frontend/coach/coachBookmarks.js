@@ -9,7 +9,7 @@ form.addEventListener('submit', async (e) => {
   const bookmarkId = document.getElementById('bookmarkId').value.trim();
   const title = document.getElementById('title').value.trim();
   const url = document.getElementById('url').value.trim();
-  const userId = document.getElementById('userId').value.trim();
+  const coachId = document.getElementById('userId').value.trim();
 
   try {
     const res = await fetch('http://localhost:3000/bookmarks', {
