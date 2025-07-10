@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const list = document.getElementById('patientLogsList');
 
   try {
-    const res = await fetch('http://localhost:3000/logs/patient', {
+    const res = await fetch('http://localhost:3000/api/logs/patient', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
 

@@ -6,17 +6,26 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <div class="app-bar">InsuLink</div>
+
   <div class="container">
-    <h2>💬 Send Feedback to Patient</h2>
-    <form id="feedback-form">
-      <input type="text" id="feedbackId" placeholder="Feedback ID" required />
-      <input type="text" id="message" placeholder="Message" required />
-      <input type="text" id="patientId" placeholder="Patient ID" required />
-      <button type="submit">Send Feedback</button>
-      <p id="message-el"></p>
-    </form>
-    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+    <div class="card">
+      <h2>💬 Send Feedback to Patient</h2>
+      <form id="feedback-form">
+        <input type="text" id="feedbackId" placeholder="Feedback ID" required />
+        <input type="text" id="message" placeholder="Message" required />
+        <input type="text" id="patientId" placeholder="Patient ID" required />
+        <button type="submit" class="button">Send Feedback</button>
+        <p id="message-el"></p>
+      </form>
+      <button onclick="logout()" class="logout">← Back to Dashboard</button>
+    </div>
   </div>
+
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+  </footer>
+
   <script src="coachFeedback.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const list = document.getElementById('bookmarksList');
 
   try {
-    const res = await fetch('http://localhost:3000/bookmarks', {
+    const res = await fetch('http://localhost:3000/api/bookmarks', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
 

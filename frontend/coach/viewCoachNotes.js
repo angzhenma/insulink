@@ -5,7 +5,7 @@ const list = document.getElementById('notesList');
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('http://localhost:3000/notes', {
+    const res = await fetch('http://localhost:3000/api/notes', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
 

@@ -2,19 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Insulink Coach Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>InsuLink Coach Login</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>Insulink Coach Login</h2>
-    <form id="login-form">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-      <p id="login-error" style="color: red;"></p>
-    </form>
+  <div class="app-bar">InsuLink</div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Coach Login</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <p id="login-error" class="error"></p>
+      </form>
+      <p class="link">Don’t have an account? <a href="../register.html">Register here</a></p>
+    </div>
   </div>
-  <script src="common/js/coachAuth.js"></script>
+
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+  </footer>
+
+  <!-- Corrected script path -->
+  <script src="../common/js/coachAuth.js"></script>
 </body>
 </html>

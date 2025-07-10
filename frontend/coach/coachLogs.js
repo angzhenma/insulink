@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   const content = document.getElementById('content').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/logs', {
+    const res = await fetch('http://localhost:3000/api/logs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,11 +23,11 @@ form.addEventListener('submit', async (e) => {
 
     const result = await res.json();
     if (res.ok) {
-      messageEl.textContent = '✅ Log added!';
+      messageEl.textContent = 'Log added!';
       form.reset();
       fetchLogs();
     } else {
-      messageEl.textContent = result.error || '❌ Failed.';
+      messageEl.textContent = result.error || 'Failed.';
     }
   } catch (err) {
     messageEl.textContent = 'Error contacting server.';
@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
 
 async function fetchLogs() {
   try {
-    const res = await fetch('http://localhost:3000/logs', {
+    const res = await fetch('http://localhost:3000/api/logs', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
