@@ -9,25 +9,27 @@
 <body>
   <header class="top-bar">
     <div class="brand">InsuLink</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
   </header>
 
-  <main class="dashboard-container">
-    <h1 id="welcomeMessage">Welcome</h1>
-
-    <div class="dashboard-buttons">
-      <a href="adminAnnouncements.html" class="dashboard-btn">📢 Manage Announcements</a>
-      <a href="adminUpload.html" class="dashboard-btn">📁 Upload Educational Resources</a>
-      <button onclick="logout()" class="dashboard-btn danger">🚪 Logout</button>
+  <main class="login-wrapper">
+    <div class="login-card">
+      <h2 id="welcomeMessage">Welcome, Admin</h2>
+      <a href="adminAnnouncements.html" class="primary-btn">📢 Manage Announcements</a>
+      <a href="adminUpload.html" class="primary-btn">📁 Upload Educational Resources</a>
+      <a href="#" class="primary-btn" onclick="document.getElementById('adminRequestsSection').scrollIntoView()">📥 View Pending Requests</a>
     </div>
-
-    <section class="admin-requests">
-      <h2>Pending Admin Requests</h2>
-      <div id="adminRequests"></div>
-    </section>
   </main>
 
+  <div class="container">
+    <section id="adminRequestsSection">
+      <h3>Pending Admin Requests</h3>
+      <div id="adminRequests"></div>
+    </section>
+  </div>
+
   <footer class="footer">
-    <p>© 2025 InsuLink | <a href="#">Privacy Policy</a></p>
+    <p>© 2025 Insulink | <a href="#">Privacy Policy</a></p>
   </footer>
 
   <script src="adminDashboard.js"></script>

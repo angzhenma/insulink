@@ -6,19 +6,24 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>📁 Upload Educational Resource</h2>
+  <header class="top-bar">
+    <div class="brand">InsuLink</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
 
-    <form id="upload-form" enctype="multipart/form-data">
-      <input type="text" id="title" placeholder="Resource Title" required />
-      <input type="text" id="description" placeholder="Description" required />
-      <input type="file" id="file" required />
-      <button type="submit">Upload</button>
-      <p id="upload-message"></p>
-    </form>
-
-    <button onclick="logout()" class="logout">← Back to Dashboard</button>
-  </div>
+  <main class="login-wrapper">
+    <div class="login-card">
+      <h2>📁 Upload Educational Resource</h2>
+      <form id="upload-form" enctype="multipart/form-data">
+        <input type="text" id="title" placeholder="Resource Title" required />
+        <input type="text" id="description" placeholder="Description" required />
+        <input type="file" id="file" required />
+        <button type="submit">Upload</button>
+        <p id="upload-message"></p>
+      </form>
+      <a href="adminDashboard.html" class="primary-btn">← Back to Dashboard</a>
+    </div>
+  </main>
 
   <script src="adminUpload.js"></script>
 </body>

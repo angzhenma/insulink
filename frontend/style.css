@@ -213,3 +213,38 @@ h2 {
 #adminRequests button:hover {
   background-color: #b71c1c;
 }
+
+.primary-btn {
+  display: inline-block;
+  background-color: #d32f2f;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  margin: 0.5rem auto;
+  transition: background-color 0.2s ease;
+}
+
+.primary-btn:hover {
+  background-color: #b71c1c;
+}
+
+.logout-btn {
+  background: white;
+  color: #d32f2f;
+  border: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  float: right;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #f1f1f1;
+}
