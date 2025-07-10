@@ -4,28 +4,30 @@
   <meta charset="UTF-8" />
   <title>Admin Dashboard – InsuLink</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app-bar">InsuLink</div>
+  <header class="top-bar">
+    <div class="brand">InsuLink</div>
+  </header>
 
-  <div class="container">
+  <main class="dashboard-container">
     <h1 id="welcomeMessage">Welcome</h1>
 
     <div class="dashboard-buttons">
-      <a href="adminAnnouncements.html" class="button">📢 Manage Announcements</a>
-      <a href="adminUpload.html" class="button">📁 Upload Educational Resources</a>
-      <button onclick="logout()" class="logout">🚪 Logout</button>
+      <a href="adminAnnouncements.html" class="dashboard-btn">📢 Manage Announcements</a>
+      <a href="adminUpload.html" class="dashboard-btn">📁 Upload Educational Resources</a>
+      <button onclick="logout()" class="dashboard-btn danger">🚪 Logout</button>
     </div>
 
-    <!-- ✅ Admin Request Section -->
-    <section id="adminRequestsSection">
+    <section class="admin-requests">
       <h2>Pending Admin Requests</h2>
       <div id="adminRequests"></div>
     </section>
-  </div>
+  </main>
 
-  <footer>
-    © 2025 Insulink | <a href="#">Privacy Policy</a>
+  <footer class="footer">
+    <p>© 2025 InsuLink | <a href="#">Privacy Policy</a></p>
   </footer>
 
   <script src="adminDashboard.js"></script>

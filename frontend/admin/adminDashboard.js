@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
+  const name = localStorage.getItem('fullname') || 'Admin';
 
   console.log('Token:', localStorage.getItem('token'));
   console.log('Role:', localStorage.getItem('role'));
@@ -10,9 +11,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     return window.location.href = '../index.html';
   }
 
-  if (name) {
-    document.getElementById('welcomeMessage').textContent = `Welcome, ${name}`;
-  }
+  document.getElementById('welcomeMessage').innerText = `Welcome, ${name}`;
+
 
   const res = await fetch('http://localhost:3000/api/admin/register-request', {
     headers: { Authorization: `Bearer ${token}` }
