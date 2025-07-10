@@ -18,8 +18,16 @@ router.post('/login', async (req, res) => {
     const result = await dynamo.get(params).promise();
     const admin = result.Item;
 
-    if (!admin || admin.password !== password) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    if (!admin) {
+      return res.status(401).json({ error: 'Admin not found' });
+    }
+
+    if (!admin.approved) {
+      return res.status(403).json({ error: 'Admin account not approved yet' });
+    }
+
+    if (admin.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
     }
 
     const token = jwt.sign(
@@ -30,7 +38,8 @@ router.post('/login', async (req, res) => {
 
     res.json({
       message: 'Login successful',
-      token
+      token,
+      fullname: admin.fullname
     });
   } catch (err) {
     console.error('Admin login error:', err);

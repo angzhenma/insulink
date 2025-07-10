@@ -1,8 +1,14 @@
 window.addEventListener('DOMContentLoaded', async () => {
-  const token = localStorage.getItem('token');
-  const role = localStorage.getItem('role');
+  const token = localStorage.getItem('adminToken');
+  const name = localStorage.getItem('adminFullname');
+  const role = 'admin';
+
   if (!token || role !== 'admin') {
     return window.location.href = '../index.html';
+  }
+
+  if (name) {
+    document.getElementById('welcomeMessage').textContent = `Welcome, ${name}`;
   }
 
   const res = await fetch('http://localhost:3000/api/admin/register-request', {
@@ -48,9 +54,9 @@ async function reject(requestId) {
   alert('Rejected ❌');
   location.reload();
 }
-async function logout() {
-  localStorage.removeItem('token');
-  localStorage.removeItem('role');
-  localStorage.removeItem('userEmail');
+
+function logout() {
+  localStorage.removeItem('adminToken');
+  localStorage.removeItem('adminFullname');
   window.location.href = '../index.html';
 }

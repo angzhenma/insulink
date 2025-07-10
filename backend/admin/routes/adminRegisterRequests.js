@@ -1,6 +1,6 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../../admin/aws-config');
+const { dynamo } = require('../../aws-config');
 const router = express.Router();
 
 // register as admin
@@ -15,7 +15,7 @@ router.post('/register-request', async (req, res) => {
     requestId: uuidv4(),
     fullname,
     email,
-    password, // hash in production
+    password,
     status: 'pending',
     requestedAt: new Date().toISOString()
   };
@@ -32,7 +32,6 @@ router.post('/register-request', async (req, res) => {
   }
 });
 
-// all pending admin requests
 router.get('/', async (req, res) => {
   try {
     const result = await dynamo.scan({ TableName: 'PendingAdmins' }).promise();
@@ -42,13 +41,11 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 📌 Approve admin request
 router.post('/approve', async (req, res) => {
   const { requestId } = req.body;
   if (!requestId) return res.status(400).json({ error: 'Missing request ID' });
 
   try {
-    // fetch pending request
     const data = await dynamo.get({
       TableName: 'PendingAdmins',
       Key: { requestId }
@@ -57,32 +54,29 @@ router.post('/approve', async (req, res) => {
     const request = data.Item;
     if (!request) return res.status(404).json({ error: 'Request not found' });
 
-    // add to Admins table
     await dynamo.put({
       TableName: 'Admins',
       Item: {
-        adminId: uuidv4(),
-        fullname: request.fullname,
         email: request.email,
+        fullname: request.fullname,
         password: request.password,
+        adminId: uuidv4(),
+        approved: true,
         createdAt: new Date().toISOString()
       }
     }).promise();
 
-    // Delete from pending
     await dynamo.delete({
       TableName: 'PendingAdmins',
       Key: { requestId }
     }).promise();
 
     res.json({ message: 'Admin approved and promoted successfully' });
-
   } catch (err) {
     res.status(500).json({ error: 'Approval failed', details: err });
   }
 });
 
-// reject admin request
 router.post('/reject', async (req, res) => {
   const { requestId } = req.body;
   if (!requestId) return res.status(400).json({ error: 'Missing request ID' });
@@ -94,7 +88,6 @@ router.post('/reject', async (req, res) => {
     }).promise();
 
     res.json({ message: 'Admin request rejected and deleted' });
-
   } catch (err) {
     res.status(500).json({ error: 'Rejection failed' });
   }

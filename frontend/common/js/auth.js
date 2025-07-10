@@ -21,7 +21,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
       if (res.ok && data.token) {
         localStorage.setItem(`${role}Token`, data.token);
-        console.log(`Logged in as ${role}`);
+        if (data.fullname) {
+          localStorage.setItem(`${role}Fullname`, data.fullname);
+        }
 
         const dashboardPages = {
           admin: 'admin/adminDashboard.html',
