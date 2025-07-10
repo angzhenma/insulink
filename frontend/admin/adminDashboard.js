@@ -1,7 +1,10 @@
 window.addEventListener('DOMContentLoaded', async () => {
-  const token = localStorage.getItem('adminToken');
-  const name = localStorage.getItem('adminFullname');
-  const role = 'admin';
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+
+  console.log('Token:', localStorage.getItem('token'));
+  console.log('Role:', localStorage.getItem('role'));
+
 
   if (!token || role !== 'admin') {
     return window.location.href = '../index.html';
