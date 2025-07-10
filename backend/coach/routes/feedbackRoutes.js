@@ -4,28 +4,34 @@ const dynamoDB = require('../aws-config');
 
 const TABLE_NAME = 'CoachFeedback';
 
-// Send feedback
+// ✅ Send feedback
 router.post('/', async (req, res) => {
-    const { feedbackId, message, patientId } = req.body;
-    const userId = req.user.sub; // Get from JWT token instead of body
+  const { feedbackId, message, patientId } = req.body;
 
-    const params = {
-        TableName: TABLE_NAME,
-        Item: {
-            feedbackId,
-            message,
-            patientId,
-            coachId,
-        },
-    };
+  // ✅ Get coach ID from JWT token (attached by verifyCoach middleware)
+  const coachId = req.user.email || req.user.sub; 
 
-    try {
-        await dynamoDB.put(params).promise();
-        res.status(201).json({ message: 'Feedback sent successfully' });
-    } catch (error) {
-        console.error('Error sending feedback:', error);
-        res.status(500).json({ error: 'Could not send feedback' });
-    }
+  if (!feedbackId || !message || !patientId || !coachId) {
+    return res.status(400).json({ error: 'All fields are required (feedbackId, message, patientId, coachId)' });
+  }
+
+  const params = {
+    TableName: TABLE_NAME,
+    Item: {
+      feedbackId, // Partition key
+      coachId,    // Sort key
+      message,
+      patientId,
+    },
+  };
+
+  try {
+    await dynamoDB.put(params).promise();
+    res.status(201).json({ message: 'Feedback sent successfully' });
+  } catch (error) {
+    console.error('Error sending feedback:', error);
+    res.status(500).json({ error: 'Could not send feedback' });
+  }
 });
 
 module.exports = router;
