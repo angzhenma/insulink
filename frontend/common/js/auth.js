@@ -20,10 +20,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       const data = await res.json();
 
       if (res.ok && data.token) {
-        localStorage.setItem(`${role}Token`, data.token);
-        if (data.fullname) {
-          localStorage.setItem(`${role}Fullname`, data.fullname);
-        }
+        localStorage.setItem(`token`, data.token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('${role}Token', data.token);
+
+        console.log('Logged in as ${role}');
 
         const dashboardPages = {
           admin: 'admin/adminDashboard.html',
