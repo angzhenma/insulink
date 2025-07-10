@@ -12,6 +12,5 @@ AWS.config.update({
 // AWS service clients
 const dynamo = new AWS.DynamoDB.DocumentClient();
 const s3 = new AWS.S3();
-const cognito = new AWS.CognitoIdentityServiceProvider();
 
-module.exports = { dynamo, s3, cognito };
+module.exports = { dynamo, s3 };

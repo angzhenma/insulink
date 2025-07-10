@@ -18,6 +18,10 @@ function verifyPatient(req, res, next) {
       return res.status(403).json({ error: 'Forbidden: Patients only' });
     }
 
+    if (!decoded.sub) {
+      return res.status(400).json({ error: 'User ID not found in token.' });
+    }
+
     req.user = decoded;
     next();
   } catch (err) {

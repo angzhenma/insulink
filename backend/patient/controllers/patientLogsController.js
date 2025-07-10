@@ -27,7 +27,13 @@ const logHealthData = async (req, res) => {
 
 const getHealthLogs = async (req, res) => {
   try {
+    console.log('Decoded JWT user:', req.user); // Debug line
+
     const userId = req.user.sub;
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID not found in token.' });
+    }
+
     const logs = await PatientLogModel.getHealthLogs(userId);
 
     res.status(200).json({
