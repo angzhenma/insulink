@@ -1,36 +1,46 @@
 const express = require('express');
-const AWS = require('aws-sdk');
+const jwt = require('jsonwebtoken');
+const { dynamo } = require('../aws-config'); // adjust path if needed
+
 const router = express.Router();
 
-const cognito = new AWS.CognitoIdentityServiceProvider();
-
-const CLIENT_ID = process.env.COGNITO_CLIENT_ID; // Your App Client ID
-const USER_POOL_ID = process.env.COGNITO_USER_POOL_ID;
+const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
+const JWT_EXPIRES_IN = '3h';
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   const params = {
-    AuthFlow: 'USER_PASSWORD_AUTH',
-    ClientId: CLIENT_ID,
-    AuthParameters: {
-      USERNAME: email,
-      PASSWORD: password,
-    },
+    TableName: 'Coaches',
+    Key: { email }
   };
 
   try {
-    const response = await cognito.initiateAuth(params).promise();
+    const result = await dynamo.get(params).promise();
+    const coach = result.Item;
 
-    return res.status(200).json({
+    if (!coach) {
+      return res.status(401).json({ error: 'Coach not found' });
+    }
+
+    if (coach.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+
+    const token = jwt.sign(
+      { email: coach.email, role: 'coach' },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    res.json({
       message: 'Login successful',
-      token: response.AuthenticationResult.IdToken,
-      accessToken: response.AuthenticationResult.AccessToken,
-      refreshToken: response.AuthenticationResult.RefreshToken
+      token,
+      fullname: coach.fullname
     });
-  } catch (error) {
-    console.error('Cognito auth error:', error);
-    return res.status(401).json({ error: 'Invalid email or password' });
+  } catch (err) {
+    console.error('Coach login error:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
