@@ -1,26 +1,33 @@
-document.getElementById('login-form').addEventListener('submit', async (e) => {
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const errorEl = document.getElementById('login-error');
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const role = document.getElementById('role').value;
+
+  const endpoint = {
+    admin: '/api/admin/login',
+    coach: '/api/coach/login',
+    patient: '/api/patient/login',
+  }[role];
 
   try {
-    const response = await fetch('http://localhost:3000/api/admin/login', {
+    const res = await fetch(`http://localhost:3000${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
 
-    const result = await response.json();
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Login failed');
 
-    if (response.ok && result.token) {
-      localStorage.setItem('adminToken', result.token);
-      window.location.href = 'admin/adminDashboard.html';
-    } else {
-      errorEl.textContent = result.error || 'Login failed.';
-    }
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('role', role);
+
+    // Redirect to respective dashboard
+    window.location.href = `/frontend/${role}/${role}Dashboard.html`;
+
   } catch (err) {
-    errorEl.textContent = 'Error connecting to backend.';
+    alert('Login failed: ' + err.message);
   }
 });

@@ -2,19 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Dashboard – Insulink</title>
+  <title>Admin Dashboard – InsuLink</title>
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <div class="app-bar">InsuLink</div>
+
   <div class="container">
-    <h1>Welcome, Admin</h1>
+    <h1>Welcome back, Admin!</h1>
 
     <div class="dashboard-buttons">
       <a href="adminAnnouncements.html" class="button">📢 Manage Announcements</a>
       <a href="adminUpload.html" class="button">📁 Upload Educational Resources</a>
       <button onclick="logout()" class="logout">🚪 Logout</button>
     </div>
+
+    <!-- ✅ Admin Request Section -->
+    <section id="adminRequestsSection">
+      <h2>Pending Admin Requests</h2>
+      <div id="adminRequests"></div>
+    </section>
   </div>
+
+  <footer>
+    © 2025 Insulink | <a href="#">Privacy Policy</a>
+  </footer>
 
   <script src="adminDashboard.js"></script>
 </body>

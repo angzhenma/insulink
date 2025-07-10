@@ -1,57 +1,64 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f2f2f2;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  width: 360px;
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 1.5rem;
+  background-color: #fefefe;
   color: #333;
 }
 
-form input,
-.button,
-.logout {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+.app-bar {
+  background-color: #c62828;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.4rem;
 }
 
-.button {
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
+footer {
+  background-color: #f5f5f5;
+  padding: 1rem;
   text-align: center;
-  border: none;
+  font-size: 0.9rem;
+  color: #777;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
-.logout {
-  background-color: #dc3545;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+input, select, button {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #c62828;
   color: white;
+  font-weight: bold;
   border: none;
+  cursor: pointer;
 }
 
-.button:hover,
-.logout:hover {
-  opacity: 0.9;
-  cursor: pointer;
+button:hover {
+  background-color: #b71c1c;
 }

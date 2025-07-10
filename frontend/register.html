@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>InsuLink Login</title>
+  <title>Register for InsuLink</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -10,17 +10,19 @@
   <div class="app-bar">InsuLink</div>
 
   <div class="container">
-    <form id="loginForm">
-      <h2>Login</h2>
+    <form id="registerForm">
+      <h2>Register</h2>
+      <input type="text" id="fullname" placeholder="Full Name" required />
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
       <select id="role">
         <option value="patient">Patient</option>
         <option value="coach">Coach</option>
         <option value="admin">Admin</option>
       </select>
-      <button type="submit">Login</button>
-      <p>Don't have an account? <a href="register.html">Register here</a></p>
+      <button type="submit">Register</button>
+      <p>Already have an account? <a href="index.html">Login here</a></p>
     </form>
   </div>
 
@@ -28,6 +30,6 @@
     © 2025 Insulink | <a href="#">Privacy Policy</a>
   </footer>
 
-  <script src="js/auth.js"></script>
+  <script src="js/register.js"></script>
 </body>
 </html>
