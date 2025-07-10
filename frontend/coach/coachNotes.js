@@ -27,7 +27,7 @@ async function loadTags() {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const noteId = document.getElementById('noteId').value.trim();
-  const coachId = document.getElementById('userId').value.trim(); // renamed to coachId
+  const userId = document.getElementById('userId').value.trim();
   const content = document.getElementById('content').value.trim();
   const patientId = document.getElementById('patientId').value.trim();
   const tagIds = Array.from(tagSelect.selectedOptions).map(opt => opt.value);
@@ -44,10 +44,10 @@ form.addEventListener('submit', async (e) => {
 
     const result = await res.json();
     if (res.ok) {
-      messageEl.textContent = '✅ Note created!';
+      messageEl.textContent = 'Note created!';
       form.reset();
     } else {
-      messageEl.textContent = result.error || '❌ Failed.';
+      messageEl.textContent = result.error || 'Failed.';
     }
   } catch (err) {
     messageEl.textContent = 'Error contacting server.';
