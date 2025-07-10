@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
             feedbackId,
             message,
             patientId,
-            userId,
+            coachId,
         },
     };
 
