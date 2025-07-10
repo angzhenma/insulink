@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
             bookmarkId,
             title,
             url,
-            userId, // ✅ required (sort key)
+            coachId, //required (sort key)
         },
     };
 
