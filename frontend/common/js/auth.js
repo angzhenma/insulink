@@ -1,33 +1,41 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
 
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const role = document.getElementById('role').value;
-
-  const endpoint = {
+  const endpoints = {
     admin: '/api/admin/login',
     coach: '/api/coach/login',
-    patient: '/api/patient/login',
-  }[role];
+    patient: '/api/patient/login'
+  };
 
-  try {
-    const res = await fetch(`http://localhost:3000${endpoint}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+  for (const role in endpoints) {
+    try {
+      const res = await fetch(endpoints[role], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Login failed');
+      const data = await res.json();
 
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('role', role);
+      if (res.ok && data.token) {
+        localStorage.setItem(`${role}Token`, data.token);
+        console.log(`Logged in as ${role}`);
 
-    // Redirect to respective dashboard
-    window.location.href = `/frontend/${role}/${role}Dashboard.html`;
+        const dashboardPages = {
+          admin: 'admin/adminDashboard.html',
+          coach: 'coach/coachDashboard.html',
+          patient: 'patient/patient-dashboard.html'
+        };
 
-  } catch (err) {
-    alert('Login failed: ' + err.message);
+        window.location.href = dashboardPages[role];
+        return;
+      }
+    } catch (err) {
+      console.error(`Error trying ${role}:`, err);
+    }
   }
+
+  alert('Invalid login credentials. Please try again.');
 });

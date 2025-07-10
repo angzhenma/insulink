@@ -2,32 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>InsuLink Login</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – InsuLink</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <div class="app-bar">InsuLink</div>
+  <!-- Top App Bar -->
+  <header class="top-bar">
+    <div class="brand">InsuLink</div>
+  </header>
 
-  <div class="container">
-    <form id="loginForm">
+  <!-- Login Card -->
+  <main class="login-wrapper">
+    <div class="login-card">
       <h2>Login</h2>
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <select id="role">
-        <option value="patient">Patient</option>
-        <option value="coach">Coach</option>
-        <option value="admin">Admin</option>
-      </select>
-      <button type="submit">Login</button>
-      <p>Don't have an account? <a href="register.html">Register here</a></p>
-    </form>
-  </div>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" id="email" required />
+        <input type="password" placeholder="Password" id="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p class="link">Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+  </main>
 
-  <footer>
-    © 2025 Insulink | <a href="#">Privacy Policy</a>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 InsuLink | <a href="#">Privacy Policy</a></p>
   </footer>
 
-  <script src="js/auth.js"></script>
+  <script src="common/js/auth.js"></script>
 </body>
 </html>

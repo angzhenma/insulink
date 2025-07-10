@@ -1,64 +1,145 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
+* {
   margin: 0;
   padding: 0;
-  background-color: #fefefe;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* app bar */
+.top-bar {
+  background-color: #d32f2f;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* login wrapper */
+.login-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+/* login card */
+.login-card {
+  background-color: white;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-card input,
+.login-card select,
+.login-card button {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.login-card input:focus,
+.login-card select:focus {
+  outline: none;
+  border-color: #d32f2f;
+}
+
+.login-card button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-card button:hover {
+  background-color: #b71c1c;
+}
+
+.link {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background-color: #f1f1f1;
+  color: #666;
+  margin-top: auto;
+}
+.footer a {
+  color: #d32f2f;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
 }
 
 .app-bar {
-  background-color: #c62828;
+  background-color: #d32f2f;
+  color: white;
   padding: 1rem 2rem;
-  color: white;
-  font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-footer {
-  background-color: #f5f5f5;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #777;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
+/* container */
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-}
-
-form {
-  background: white;
+  max-width: 1000px;
+  margin: 100px auto 0 auto;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
+  flex-grow: 1;
 }
 
-input, select, button {
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background-color: #c62828;
-  color: white;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #b71c1c;
+/* card style */
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }

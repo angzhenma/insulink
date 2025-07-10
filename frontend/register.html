@@ -9,25 +9,30 @@
 
   <div class="app-bar">InsuLink</div>
 
-  <div class="container">
+  <div class="container card">
     <form id="registerForm">
       <h2>Register</h2>
+
       <input type="text" id="fullname" placeholder="Full Name" required />
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-      <select id="role">
+
+      <label for="role">Select Role</label>
+      <select id="role" required>
         <option value="patient">Patient</option>
         <option value="coach">Coach</option>
         <option value="admin">Admin</option>
       </select>
+
       <button type="submit">Register</button>
+
       <p>Already have an account? <a href="index.html">Login here</a></p>
     </form>
   </div>
 
   <footer>
-    © 2025 Insulink | <a href="#">Privacy Policy</a>
+    © 2025 Insulink | <a href="privacy.html">Privacy Policy</a>
   </footer>
 
   <script src="js/register.js"></script>

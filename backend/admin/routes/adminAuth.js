@@ -1,38 +1,41 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const { dynamo } = require('../../aws-config');
 
-// upgrade to DB later
-const ADMIN_CREDENTIALS = {
-  email: 'admin@insulink.com',
-  password: 'azaan123',
-  role: 'admin'
-};
-
-// JWT configuration
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '3h';
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+  const params = {
+    TableName: 'Admins',
+    Key: { email }
+  };
+
+  try {
+    const result = await dynamo.get(params).promise();
+    const admin = result.Item;
+
+    if (!admin || admin.password !== password) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
     const token = jwt.sign(
-      {
-        email: ADMIN_CREDENTIALS.email,
-        role: ADMIN_CREDENTIALS.role
-      },
+      { email: admin.email, role: 'admin' },
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES_IN }
     );
 
-    return res.status(200).json({
+    res.json({
       message: 'Login successful',
       token
     });
+  } catch (err) {
+    console.error('Admin login error:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-  return res.status(401).json({ error: 'Invalid email or password' });
 });
 
 module.exports = router;
