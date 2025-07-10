@@ -6,9 +6,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const API_BASE_URL = 'http://localhost:3000';
 
   const endpoints = {
-    admin: '${API_BASE_URL}/api/admin/login',
-    coach: '${API_BASE_URL}/api/coach/login',
-    patient: '${API_BASE_URL}/api/patient/login'
+    admin: `${API_BASE_URL}/api/admin/login`,
+    coach: `${API_BASE_URL}/api/coach/login`,
+    patient: `${API_BASE_URL}/api/patient/login`
   };
 
   for (const role in endpoints) {
@@ -25,9 +25,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         localStorage.setItem(`token`, data.token);
         localStorage.setItem('role', role);
         localStorage.setItem('userEmail', email);
-        localStorage.setItem('${role}Token', data.token);
+        localStorage.setItem(`${role}Token`, data.token);
 
-        console.log('Logged in as ${role}');
+        console.log(`Logged in as ${role}`);
 
         const dashboardPages = {
           admin: 'admin/adminDashboard.html',
