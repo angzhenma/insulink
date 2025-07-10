@@ -1,4 +1,5 @@
-require('dotenv').config();
+//require('dotenv').config();
+require('dotenv').config({ path: __dirname + '/.env' });
 console.log("S3 Bucket Name:", process.env.S3_BUCKET_NAME);
 const express = require('express');
 const cors = require('cors');
