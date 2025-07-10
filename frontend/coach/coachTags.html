@@ -6,16 +6,25 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>🏷️ Create Tag</h2>
-    <form id="tag-form">
-      <input type="text" id="tagId" placeholder="Tag ID" required />
-      <input type="text" id="tagName" placeholder="Tag Name" required />
-      <button type="submit">Create Tag</button>
-      <p id="message-el"></p>
-    </form>
-    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  <div class="app-bar">InsuLink</div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Create Tag</h2>
+      <form id="tag-form">
+        <input type="text" id="tagId" placeholder="Tag ID" required />
+        <input type="text" id="tagName" placeholder="Tag Name" required />
+        <button type="submit">Create Tag</button>
+        <p id="message-el" class="message"></p>
+      </form>
+      <button onclick="logout()" class="logout" style="margin-top: 1rem;">← Back to Dashboard</button>
+    </div>
   </div>
+
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+  </footer>
+
   <script src="coachTags.js"></script>
 </body>
 </html>

@@ -9,28 +9,29 @@
   <div class="app-bar">InsuLink</div>
 
   <div class="container">
-    <h1>Welcome back, Coach!</h1>
+    <div class="card">
+      <h1>Welcome back, Coach!</h1>
 
-    <div class="dashboard-buttons">
-      <a href="coachLogs.html" class="button">View Logs</a>
-      <a href="coachFeedback.html" class="button">Send Feedback</a>
-      <a href="coachNotes.html" class="button">Create Notes</a>
-      <a href="viewCoachNotes.html" class="button">View Notes</a>
-      <a href="coachTags.html" class="button">Create Tags</a>
-      <a href="coachBookmarks.html" class="button">Add Bookmark</a>
-      <a href="bookmarksFetch.html" class="button">View Bookmarks</a>
-      <button onclick="logout()" class="logout">Logout</button>
+      <div class="dashboard-buttons">
+        <a href="coachLogs.html" class="button">View Logs</a>
+        <a href="coachFeedback.html" class="button">Send Feedback</a>
+        <a href="coachNotes.html" class="button">Create Notes</a>
+        <a href="viewCoachNotes.html" class="button">View Notes</a>
+        <a href="coachTags.html" class="button">Create Tags</a>
+        <a href="coachBookmarks.html" class="button">Add Bookmark</a>
+        <a href="bookmarksFetch.html" class="button">View Bookmarks</a>
+        <button onclick="logout()" class="logout">Logout</button>
+      </div>
     </div>
 
-    <!-- Patient Logs Overview -->
-    <section id="patientLogsSection">
+    <section id="patientLogsSection" class="card">
       <h2>Recent Patient Logs</h2>
       <ul id="patientLogsList"></ul>
     </section>
   </div>
 
-  <footer>
-    © 2025 InsuLink | <a href="#">Privacy Policy</a>
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
   </footer>
 
   <script src="coachDashboard.js"></script>

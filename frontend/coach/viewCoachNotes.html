@@ -6,11 +6,20 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>🗒️ Your Notes</h2>
-    <ul id="notesList"></ul>
-    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+  <div class="app-bar">InsuLink</div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Your Notes</h2>
+      <ul id="notesList" style="text-align: left; list-style-type: disc; padding-left: 1.2rem;"></ul>
+      <button onclick="logout()" class="logout" style="margin-top: 1rem;">← Back to Dashboard</button>
+    </div>
   </div>
+
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+  </footer>
+
   <script src="viewCoachNotes.js"></script>
 </body>
 </html>

@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Coach – View Bookmarks</title>
+  <title>View Bookmarks – InsuLink Coach</title>
   <link rel="stylesheet" href="../style.css" />
-  
 </head>
 <body>
+  <div class="app-bar">InsuLink</div>
+
   <div class="container">
-    <h2>🔖 Saved Bookmarks</h2>
-    <ul id="bookmarksList"></ul>
-    <button onclick="logout()" class="logout">← Back to Dashboard</button>
+    <div class="card">
+      <h2>Saved Bookmarks</h2>
+      <ul id="bookmarksList"></ul>
+      <button onclick="logout()" class="logout">← Back to Dashboard</button>
+    </div>
   </div>
-  <script src="viewCoachBookmarks.js"></script>
+
+  <footer class="footer">
+    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+  </footer>
+
+  <script src="bookmarksFetch.js"></script>
 </body>
 </html>
