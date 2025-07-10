@@ -12,7 +12,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   }
 
   const endpoint = {
-    admin: '/api/admin/register-request',  // You’ll manually approve these later
+    admin: '/api/admin/register-request',
     coach: '/api/coach/register',
     patient: '/api/patient/register'
   }[role];
