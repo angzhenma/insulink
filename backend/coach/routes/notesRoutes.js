@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         TableName: TABLE_NAME,
         Item: {
             noteId,   // Partition key
-            userId,   // Sort key
+            coachId,   // Sort key
             content,
             patientId,
         },
