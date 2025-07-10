@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-require('dotenv').config(); 
+require('dotenv').config({ path: '../.env' });
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
