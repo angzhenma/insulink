@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const dynamoDB = require('../aws-config');
 
+//DynamoDB table name
 const TABLE_NAME = 'CoachBookmarks';
 
 // Add new bookmark
 router.post('/', async (req, res) => {
   const { bookmarkId, title, url, coachId } = req.body;
 
+  // Check all fields
   if (!bookmarkId || !title || !url || !coachId) {
     return res.status(400).json({ error: 'All fields are required (bookmarkId, title, url, coachId)' });
   }
