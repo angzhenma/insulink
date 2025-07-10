@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   const coachId = document.getElementById('userId').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/bookmarks', {
+    const res = await fetch('http://localhost:3000/api/bookmarks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,10 +23,10 @@ form.addEventListener('submit', async (e) => {
 
     const result = await res.json();
     if (res.ok) {
-      messageEl.textContent = '✅ Bookmark added!';
+      messageEl.textContent = 'Bookmark added!';
       form.reset();
     } else {
-      messageEl.textContent = result.error || '❌ Failed.';
+      messageEl.textContent = result.error || 'Failed.';
     }
   } catch (err) {
     messageEl.textContent = 'Error contacting server.';

@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   const patientId = document.getElementById('patientId').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/feedback', {
+    const res = await fetch('http://localhost:3000/api/feedback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
