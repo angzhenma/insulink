@@ -21,10 +21,10 @@ form.addEventListener('submit', async (e) => {
 
     const result = await res.json();
     if (res.ok) {
-      messageEl.textContent = '✅ Tag created!';
+      messageEl.textContent = 'Tag created!';
       form.reset();
     } else {
-      messageEl.textContent = result.error || '❌ Failed.';
+      messageEl.textContent = result.error || 'Failed.';
     }
   } catch (err) {
     messageEl.textContent = 'Error contacting server.';
