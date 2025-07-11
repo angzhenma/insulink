@@ -1,10 +1,10 @@
+  
+ // author: Mohamed Yanaal Iqbal
   const { v4: uuidv4 } = require('uuid');
   const { dynamo } = require('../aws-config'); 
   const TABLE_NAME = 'PatientHealthLogs';
 
-  /**
-   * Logs a new health entry to DynamoDB.
-   */
+
   const logHealthData = async (patientId, logData) => {
     const { bloodGlucose, foodIntake, physicalActivity } = logData;
 
@@ -26,9 +26,7 @@
     return item;
   };
 
-  /**
-   * Retrieves all health logs for the patient.
-   */
+
   const getHealthLogs = async (patientId) => {
     const params = {
       TableName: TABLE_NAME,

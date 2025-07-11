@@ -1,4 +1,5 @@
-
+ 
+ // author: Mohamed Yanaal Iqbal
 const form = document.getElementById('healthLogForm');
 const responseMessage = document.getElementById('responseMessage');
 

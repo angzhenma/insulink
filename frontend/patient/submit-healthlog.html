@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,6 @@
         })
         .then(data => {
             document.getElementById('status').textContent = 'Health Log Submitted Successfully.';
-            // Clear form
             document.getElementById('healthLogForm').reset();
         })
         .catch(error => {

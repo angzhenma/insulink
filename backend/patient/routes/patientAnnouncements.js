@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const express = require('express');
 const router = express.Router();
 const { dynamo } = require('../aws-config');

@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const PatientLogModel = require('../models/patientLogsModel');
 
 const logHealthData = async (req, res) => {
@@ -27,7 +29,7 @@ const logHealthData = async (req, res) => {
 
 const getHealthLogs = async (req, res) => {
   try {
-    console.log('Decoded JWT user:', req.user); // Debug line
+    console.log('Decoded JWT user:', req.user); 
 
     const userId = req.user.sub;
     if (!userId) {

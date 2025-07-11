@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const NoteModel = require('../models/noteModel');
 
 const addNote = async (req, res) => {

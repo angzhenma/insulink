@@ -1,3 +1,4 @@
+
 const token = localStorage.getItem('patientToken');
 
 if (!token) {

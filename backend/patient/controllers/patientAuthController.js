@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const jwt = require('jsonwebtoken');
 const { dynamo } = require('../aws-config');
 const { v4: uuidv4 } = require('uuid');
@@ -5,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '7d';
 
-// Patient Login
+
 const loginPatient = async (req, res) => {
   const { email, password } = req.body;
 
@@ -48,7 +50,7 @@ const loginPatient = async (req, res) => {
   }
 };
 
-// Patient Register
+
 const registerPatient = async (req, res) => {
   const { fullname, email, password } = req.body;
 

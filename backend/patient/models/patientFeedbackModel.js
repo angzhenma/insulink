@@ -1,10 +1,9 @@
-const { dynamo } = require('../aws-config'); // use shared SDK instance
+
+ // author: Mohamed Yanaal Iqbal
+const { dynamo } = require('../aws-config');
 
 const TABLE_NAME = 'CoachFeedback';
 
-/**
- * Retrieves all feedback entries for a patient.
- */
 const getFeedbackForPatient = async (patientId) => {
   const params = {
     TableName: TABLE_NAME,
