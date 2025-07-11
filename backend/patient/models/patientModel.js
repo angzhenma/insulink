@@ -3,7 +3,7 @@ const { dynamo } = require('../aws-config');
 
 const getPatientByEmail = async (email) => {
   const params = {
-    TableName: 'PatientUsers',
+    TableName: 'Patients',
     Key: { email }
   };
 

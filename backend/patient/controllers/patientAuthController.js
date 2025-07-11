@@ -1,54 +1,103 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { getPatientByEmail } = require('../models/patientModel'); 
-const JWT_SECRET = process.env.JWT_SECRET;
+const { dynamo } = require('../aws-config');
+const { v4: uuidv4 } = require('uuid');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
+const JWT_EXPIRES_IN = '7d';
 
 const loginPatient = async (req, res) => {
   const { email, password } = req.body;
 
+  const params = {
+    TableName: 'Patients',
+    Key: { email }
+  };
+
   try {
-    const patient = await getPatientByEmail(email);
+    const result = await dynamo.get(params).promise();
+    const patient = result.Item;
 
     if (!patient) {
-      console.log('Patient not found for email:', email);
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ error: 'Patient not found' });
     }
 
-    console.log('Patient found:', patient.email);
-    console.log('Comparing password:', password);
-    console.log('With hash from DB:', patient.passwordHash);
-
-    const isMatch = await bcrypt.compare(password, patient.passwordHash);
-
-    if (!isMatch) {
-      console.log('Password mismatch');
-      return res.status(401).json({ error: 'Invalid credentials' });
+    if (patient.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
     }
 
-    console.log('Password matched. Generating token...');
-    
     const token = jwt.sign(
-  {
-    sub: patient.email,  
-    email: patient.email,
-    role: 'patient'
-  },
-  JWT_SECRET,
-  { expiresIn: '7d' }
-);
-
-    return res.status(200).json({
-      message: 'Login successful',
-      token,
-      user: {
+      {
         email: patient.email,
         role: 'patient',
-      }
+        patientId: patient.patientId
+      },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      fullname: patient.fullname
     });
   } catch (err) {
-    console.error('Login error:', err);
-    return res.status(500).json({ error: 'Server error' });
+    console.error('Patient login error:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
-module.exports = { loginPatient };
+const registerPatient = async (req, res) => {
+  const { fullname, email, password } = req.body;
+
+  if (!fullname || !email || !password) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    const scanParams = {
+      TableName: 'Patients',
+      ProjectionExpression: 'patientId'
+    };
+
+    const result = await dynamo.scan(scanParams).promise();
+    const existingIds = result.Items.map(item => item.patientId);
+
+    let maxNumber = 0;
+    existingIds.forEach(id => {
+      const num = parseInt(id.replace(/^p/, ''), 10);
+      if (!isNaN(num) && num > maxNumber) {
+        maxNumber = num;
+      }
+    });
+
+    const nextNumber = maxNumber + 1;
+    const patientId = `p${nextNumber.toString().padStart(3, '0')}`;
+
+    const putParams = {
+      TableName: 'Patients',
+      Item: {
+        email,
+        fullname,
+        password,  
+        patientId,
+        createdAt: new Date().toISOString()
+      }
+    };
+
+    await dynamo.put(putParams).promise();
+    res.status(201).json({ message: 'Patient registered successfully', patientId });
+  } catch (err) {
+    console.error('Patient registration error:', err);
+    res.status(500).json({ error: 'Failed to register patient' });
+  }
+};
+    await dynamo.put(params).promise();
+    res.status(201).json({ message: 'Patient registered successfully', patientId });
+
+  } catch (err) {
+    console.error('Patient registration error:', err);
+    res.status(500).json({ error: 'Failed to register patient' });
+  }
+};
+
+module.exports = { loginPatient, registerPatient };
