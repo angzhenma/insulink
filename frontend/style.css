@@ -13,7 +13,6 @@ body {
   min-height: 100vh;
 }
 
-/* app bar */
 .top-bar {
   background-color: #d32f2f;
   color: white;
@@ -35,7 +34,6 @@ body {
   font-weight: 600;
 }
 
-/* login wrapper */
 .login-wrapper {
   flex-grow: 1;
   display: flex;
@@ -44,7 +42,6 @@ body {
   padding-top: 100px;
 }
 
-/* login card */
 .login-card {
   background-color: white;
   padding: 2.5rem 2rem;
@@ -98,7 +95,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* footer */
 .footer {
   text-align: center;
   padding: 1rem;
@@ -128,7 +124,6 @@ body {
   z-index: 100;
 }
 
-/* container */
 .container {
   max-width: 1000px;
   margin: 100px auto 0 auto;
@@ -136,7 +131,6 @@ body {
   flex-grow: 1;
 }
 
-/* card style */
 .card {
   background-color: white;
   padding: 2rem;
@@ -212,4 +206,49 @@ h2 {
 
 #adminRequests button:hover {
   background-color: #b71c1c;
+}
+
+.primary-btn {
+  display: inline-block;
+  background-color: #d32f2f;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  margin: 0.5rem auto;
+  transition: background-color 0.2s ease;
+}
+
+.primary-btn:hover {
+  background-color: #b71c1c;
+}
+
+.logout-btn {
+  background: white;
+  color: #d32f2f;
+  border: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  float: right;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.wide-card {
+  background-color: white;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
 }

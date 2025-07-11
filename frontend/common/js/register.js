@@ -38,4 +38,3 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     alert('Registration failed: ' + err.message);
   }
 });
-
