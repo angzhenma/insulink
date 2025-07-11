@@ -1,5 +1,5 @@
 const token = localStorage.getItem('coachToken');
-if (!token) window.location.href = '../coachLogin.html';
+if (!token) window.location.href = 'coachLogin.html';
 
 const form = document.getElementById('feedback-form');
 const messageEl = document.getElementById('message-el');

@@ -2,7 +2,7 @@ const token = localStorage.getItem('coachToken');
 const list = document.getElementById('announcement-list');
 
 if (!token) {
-  window.location.href = '../coachLogin.html';
+  window.location.href = 'coachLogin.html';
 }
 
 async function fetchAnnouncements() {

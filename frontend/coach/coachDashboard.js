@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('coachToken');
   if (!token) {
-    return window.location.href = '../coachLogin.html';
+    return window.location.href = 'coachLogin.html';
   }
 
   const list = document.getElementById('patientLogsList');
