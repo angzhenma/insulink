@@ -22,10 +22,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     data.logs.forEach(log => {
       const li = document.createElement('li');
       li.innerHTML = `
-        <strong>Patient ID:</strong> ${log.userId || 'Unknown'}<br>
-        <strong>Blood Glucose:</strong> ${log.bloodGlucose}<br>
-        <strong>Food Intake:</strong> ${log.foodIntake}<br>
-        <strong>Activity:</strong> ${log.physicalActivity}<br>
+        <strong>Patient ID:</strong> ${log.patientId || 'Unknown'}<br>
+        <strong>Blood Glucose:</strong> ${log.bloodGlucose || 'N/A'}<br>
+        <strong>Food Intake:</strong> ${log.foodIntake || 'N/A'}<br>
+        <strong>Activity:</strong> ${log.physicalActivity || 'N/A'}<br>
         <hr/>
       `;
       list.appendChild(li);
