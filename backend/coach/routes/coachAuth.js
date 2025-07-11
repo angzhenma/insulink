@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
 const { dynamo } = require('../aws-config'); // adjust path if needed
 
 const router = express.Router();
@@ -29,7 +30,7 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign(
-      { email: coach.email, role: 'coach' },
+      { email: coach.email, role: 'coach', coachId: coach.coachId },
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES_IN }
     );
@@ -45,7 +46,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-//Coach Register
+// ✅ Coach Register
 router.post('/register', async (req, res) => {
   const { fullname, email, password } = req.body;
 
@@ -53,12 +54,15 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
+  const coachId = uuidv4();
+
   const params = {
     TableName: 'Coaches',
     Item: {
       email,
       fullname,
-      password, // (Hash in production)
+      password,
+      coachId,
       createdAt: new Date().toISOString()
     }
   };
