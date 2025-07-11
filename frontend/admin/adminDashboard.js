@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
-  const name = localStorage.getItem('fullname') || 'Admin';
+  const name = localStorage.getItem('fullname') || '';
 
   console.log('Token:', localStorage.getItem('token'));
   console.log('Role:', localStorage.getItem('role'));
@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     return window.location.href = '../index.html';
   }
 
-  document.getElementById('welcomeMessage').innerText = `Welcome, ${name}`;
+  document.getElementById('welcomeMessage').innerText = `Welcome back, Admin ${name}`;
 
 
   const res = await fetch('http://localhost:3000/api/admin/register-request', {
@@ -59,7 +59,8 @@ async function reject(requestId) {
 }
 
 function logout() {
-  localStorage.removeItem('adminToken');
-  localStorage.removeItem('adminFullname');
+  localStorage.removeItem('token');
+  localStorage.removeItem('fullname');
+  localStorage.removeItem('role');
   window.location.href = '../index.html';
 }
