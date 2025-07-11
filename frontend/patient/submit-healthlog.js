@@ -1,3 +1,4 @@
+
 const token = localStorage.getItem('patientToken');
 const form = document.getElementById('healthLogForm');
 const msg = document.getElementById('responseMsg');

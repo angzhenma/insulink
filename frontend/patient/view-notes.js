@@ -1,3 +1,4 @@
+
 const apiBase = 'http://localhost:3000/api/patient/note';
 const token = localStorage.getItem('patientToken');
 const container = document.getElementById('notes-container');

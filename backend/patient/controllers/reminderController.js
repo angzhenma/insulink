@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const ReminderModel = require('../models/reminderModel');
 
 const addReminder = async (req, res) => {

@@ -1,3 +1,4 @@
+
 const token = localStorage.getItem('patientToken');
 if (!token) {
   window.location.href = '../../index.html';
@@ -5,7 +6,7 @@ if (!token) {
 
 function showMessage(id, message, show = true) {
   const el = document.getElementById(id);
-  if (!el) return; // Prevents errors if element is missing
+  if (!el) return; 
   el.textContent = message;
   el.style.display = show ? 'block' : 'none';
 }

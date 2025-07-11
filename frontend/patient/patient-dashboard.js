@@ -1,5 +1,5 @@
 
-function logout() { // Patient main hub page
-  localStorage.removeItem('patientToken'); // Use the appropriate key
+function logout() { 
+  localStorage.removeItem('patientToken'); 
   window.location.href = '../index.html';
 }

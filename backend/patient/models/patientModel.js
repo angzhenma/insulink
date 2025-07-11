@@ -1,3 +1,5 @@
+
+ // author: Mohamed Yanaal Iqbal
 const AWS = require('aws-sdk');
 const { dynamo } = require('../aws-config');
 
