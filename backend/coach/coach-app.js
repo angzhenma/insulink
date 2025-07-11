@@ -31,7 +31,7 @@ app.use('/api/notes', verifyCoach, notesRoutes);
 app.use('/api/tags', verifyCoach, tagsRoutes);
 app.use('/api/coach/announcements', verifyCoach, coachAnnouncementsRoutes);
 
-// Root route
+// Root rout
 app.get('/', (req, res) => {
   res.send('Hello from InsuLink Coach Backend!');
 });
