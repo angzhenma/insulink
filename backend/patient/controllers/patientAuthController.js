@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '7d';
 
+// Patient Login
 const loginPatient = async (req, res) => {
   const { email, password } = req.body;
 
@@ -27,6 +28,7 @@ const loginPatient = async (req, res) => {
 
     const token = jwt.sign(
       {
+        sub: patient.patientId,
         email: patient.email,
         role: 'patient',
         patientId: patient.patientId
@@ -46,6 +48,7 @@ const loginPatient = async (req, res) => {
   }
 };
 
+// Patient Register
 const registerPatient = async (req, res) => {
   const { fullname, email, password } = req.body;
 
@@ -78,7 +81,7 @@ const registerPatient = async (req, res) => {
       Item: {
         email,
         fullname,
-        password,  
+        password,
         patientId,
         createdAt: new Date().toISOString()
       }
@@ -86,14 +89,6 @@ const registerPatient = async (req, res) => {
 
     await dynamo.put(putParams).promise();
     res.status(201).json({ message: 'Patient registered successfully', patientId });
-  } catch (err) {
-    console.error('Patient registration error:', err);
-    res.status(500).json({ error: 'Failed to register patient' });
-  }
-};
-    await dynamo.put(params).promise();
-    res.status(201).json({ message: 'Patient registered successfully', patientId });
-
   } catch (err) {
     console.error('Patient registration error:', err);
     res.status(500).json({ error: 'Failed to register patient' });
