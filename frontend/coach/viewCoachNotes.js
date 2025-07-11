@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     data.forEach(note => {
-      const li = document.createElement('li');
+      li = document.createElement('li');
       li.innerHTML = `
         <strong>Note ID:</strong> ${note.noteId}<br>
         <strong>Content:</strong> ${note.content}<br>
