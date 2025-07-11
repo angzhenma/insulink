@@ -33,8 +33,3 @@ window.addEventListener('DOMContentLoaded', async () => {
     list.innerHTML = '<li>Failed to load notes.</li>';
   }
 });
-
-function logout() {
-  localStorage.removeItem('coachToken');
-  window.location.href = 'coachLogin.html';
-}

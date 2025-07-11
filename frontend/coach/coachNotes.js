@@ -36,8 +36,8 @@ form.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
+        'Authorization': 'Bearer ' + token }
+      ,
       body: JSON.stringify({ noteId, content, patientId, tagIds })
     });
 
@@ -52,10 +52,5 @@ form.addEventListener('submit', async (e) => {
     messageEl.textContent = 'Error contacting server.';
   }
 });
-
-function logout() {
-  localStorage.removeItem('coachToken');
-  window.location.href = 'coachLogin.html';
-}
 
 loadTags();

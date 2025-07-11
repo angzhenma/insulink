@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Coach – View Notes</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="app-bar">InsuLink</div>
@@ -12,12 +13,13 @@
     <div class="login-card">
       <h2>Your Notes</h2>
       <ul id="notesList" style="text-align: left; list-style-type: disc; padding-left: 1.2rem;"></ul>
-      <button onclick="logout()" class="logout" style="margin-top: 1rem;">← Back to Dashboard</button>
+      <!--  back link -->
+      <a href="coachDashboard.html" class="primary-btn back-btn" style="margin-top: 1rem;">← Back to Dashboard</a>
     </div>
   </div>
 
   <footer class="footer">
-    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+    <p>© 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a></p>
   </footer>
 
   <script src="viewCoachNotes.js"></script>
