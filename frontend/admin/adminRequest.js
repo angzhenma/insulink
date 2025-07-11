@@ -1,17 +1,40 @@
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 
+// redirect if not logged in as admin
 if (!token || role !== 'admin') {
   window.location.href = '../index.html';
 }
 
 const adminList = document.getElementById('adminList');
+const API_BASE_URL = 'http://localhost:3000';
 
+// fetch all unapproved admins
 async function fetchAdmins() {
   try {
-    const res = await fetch('http://localhost:3000/api/admin/pending-approved', {
-      headers: { Authorization: `Bearer ${token}` }
+    const res = await fetch(`${API_BASE_URL}/api/admin/pending-approved`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
+
+    const contentType = res.headers.get('content-type');
+
+    if (!res.ok) {
+      if (contentType && contentType.includes('application/json')) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Fetch failed');
+      } else {
+        const text = await res.text();
+        throw new Error(`Fetch failed: ${text}`);
+      }
+    }
+
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await res.text();
+      throw new Error(`Unexpected response format:\n\n${text}`);
+    }
+
     const data = await res.json();
 
     adminList.innerHTML = '';
@@ -23,42 +46,66 @@ async function fetchAdmins() {
         div.innerHTML = `
           <p><strong>${admin.fullname}</strong> (${admin.email})</p>
           <button class="primary-btn" onclick="approve('${admin.email}')">✅ Approve</button>
-          <button class="primary-btn" onclick="remove('${admin.email}')">🗑 Remove</button>
+          <button class="primary-btn" onclick="removeAdmin('${admin.email}')">🗑 Remove</button>
         `;
         adminList.appendChild(div);
       });
     } else {
       adminList.innerHTML = '<p>No unapproved admins found.</p>';
     }
+
   } catch (err) {
-    adminList.innerHTML = '<p>Failed to fetch data.</p>';
+    console.error('[Admin Fetch Error]', err);
+    adminList.innerHTML = `<p style="color:red;">${err.message}</p>`;
   }
 }
 
+// approve an unapproved admin
 async function approve(email) {
-  await fetch('http://localhost:3000/api/admin/approve-existing', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ email })
-  });
-  alert('Approved!');
-  fetchAdmins();
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/admin/approve-existing`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ email })
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error || 'Approval failed');
+
+    alert('✅ Approved!');
+    fetchAdmins();
+
+  } catch (err) {
+    console.error('[Approval Error]', err);
+    alert('❌ ' + err.message);
+  }
 }
 
-async function remove(email) {
-  await fetch('http://localhost:3000/api/admin/delete-existing', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ email })
-  });
-  alert('Deleted!');
-  fetchAdmins();
+// delete unapproved admin
+async function removeAdmin(email) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/admin/delete-existing`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ email })
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error || 'Deletion failed');
+
+    alert('🗑 Deleted!');
+    fetchAdmins();
+
+  } catch (err) {
+    console.error('[Delete Error]', err);
+    alert('❌ ' + err.message);
+  }
 }
 
 function logout() {
