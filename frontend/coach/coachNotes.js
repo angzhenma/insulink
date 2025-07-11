@@ -27,7 +27,6 @@ async function loadTags() {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const noteId = document.getElementById('noteId').value.trim();
-  const userId = document.getElementById('userId').value.trim();
   const content = document.getElementById('content').value.trim();
   const patientId = document.getElementById('patientId').value.trim();
   const tagIds = Array.from(tagSelect.selectedOptions).map(opt => opt.value);
@@ -39,7 +38,7 @@ form.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({ noteId, coachId, content, patientId, tagIds })
+      body: JSON.stringify({ noteId, content, patientId, tagIds })
     });
 
     const result = await res.json();
