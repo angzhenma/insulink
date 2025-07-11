@@ -5,6 +5,42 @@
   <title>Privacy Policy – InsuLink</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .privacy-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .privacy-card {
+      background-color: white;
+      max-width: 700px;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #d32f2f;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background-color: #b71c1c;
+    }
+  </style>
 </head>
 <body>
 
@@ -12,29 +48,22 @@
     <div class="brand">InsuLink</div>
   </header>
 
-  <main class="login-wrapper">
-    <div class="login-card" style="max-width: 700px; text-align: left;">
+  <main class="privacy-wrapper">
+    <div class="privacy-card">
       <h2>Privacy Policy</h2>
       <p>
-        At InsuLink, we are committed to protecting your personal information.
-        Any data provided during your use of this platform is securely handled
-        and used only for the purpose of enhancing your experience.
+        At InsuLink, we take your privacy seriously. Any information you provide to us is securely stored and used solely to enhance your experience.
       </p>
       <p>
-        We do not share your information with third parties. All interactions
-        within the system are encrypted and stored in compliance with relevant
-        data privacy regulations.
+        Your data is not shared with third parties, and we ensure full compliance with relevant security and privacy practices.
       </p>
       <p>
         If you have questions, please contact a member of our dev team at <a href="mailto:azaan.mauroof@gmail.com">azaan.mauroof@gmail.com</a>.
       </p>
-      <a href="index.html" class="primary-btn">← Back to Login</a>
+
+      <button class="back-btn" onclick="window.history.back()">← Go Back</button>
     </div>
   </main>
-
-  <footer class="footer">
-    <p>© 2025 InsuLink | <a href="privacy.html">Privacy Policy</a></p>
-  </footer>
 
 </body>
 </html>
