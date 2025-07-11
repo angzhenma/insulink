@@ -12,12 +12,37 @@
     <button onclick="logout()" class="logout-btn">Logout</button>
   </header>
 
-  <main class="login-wrapper">
-    <div class="wide-card">
+  <main class="dashboard-wrapper">
+    <!-- Welcome Panel -->
+    <section class="welcome-panel">
       <h2 id="welcomeMessage">Welcome, Admin</h2>
-      <a href="adminAnnouncements.html" class="primary-btn">📢 Manage Announcements</a>
-      <a href="adminRequest.html" class="primary-btn">📥 Pending Admin Requests</a>
-    </div>
+      <p class="welcome-sub">Your central hub for InsuLink administration</p>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="feature-grid">
+      <!-- Manage Announcements Card -->
+      <div class="feature-card">
+        <div class="card-header">
+          📢 Manage Announcements
+        </div>
+        <div class="card-body">
+          <a href="adminAnnouncements.html" class="primary-btn">Go to Announcements</a>
+          <p class="card-desc">View, create, and schedule company-wide messages.</p>
+        </div>
+      </div>
+
+      <!-- Admin Requests Card -->
+      <div class="feature-card">
+        <div class="card-header">
+          📥 Pending Admin Requests
+        </div>
+        <div class="card-body">
+          <a href="adminRequest.html" class="primary-btn">Review Requests</a>
+          <p class="card-desc">Approve or decline user and system requests.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="adminDashboard.js"></script>
