@@ -19,7 +19,7 @@ function verifyPatient(req, res, next) {
     }
 
     if (!decoded.sub) {
-      return res.status(400).json({ error: 'User ID not found in token.' });
+      return res.status(400).json({ error: 'User Email not found in token.' });
     }
 
     req.user = decoded;

@@ -29,7 +29,7 @@ const loginPatient = async (req, res) => {
     
     const token = jwt.sign(
   {
-    sub: patient.userID,  
+    sub: patient.email,  
     email: patient.email,
     role: 'patient'
   },
@@ -43,7 +43,6 @@ const loginPatient = async (req, res) => {
       user: {
         email: patient.email,
         role: 'patient',
-        userID: patient.userID
       }
     });
   } catch (err) {
