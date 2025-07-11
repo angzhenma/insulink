@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coach – Create Tag</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app-bar">InsuLink</div>
 
-  <div class="login-wrapper">
-    <div class="login-card">
-      <h2>Create Tag</h2>
+  <!-- Top App Bar -->
+  <header class="top-bar" style="background-color: #b30000;">
+    <div class="brand">InsuLink</div>
+  </header>
+
+  <!-- Tag Card -->
+  <main class="login-wrapper">
+    <div class="login-card" style="border-top: 4px solid #b30000;">
+      <h2 style="color: #b30000;">Create Tag</h2>
       <form id="tag-form">
         <input type="text" id="tagId" placeholder="Tag ID" required />
         <input type="text" id="tagName" placeholder="Tag Name" required />
@@ -19,10 +26,11 @@
       </form>
       <button onclick="logout()" class="logout" style="margin-top: 1rem;">← Back to Dashboard</button>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+    <p>© 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a></p>
   </footer>
 
   <script src="coachTags.js"></script>
