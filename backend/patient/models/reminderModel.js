@@ -3,10 +3,10 @@ const { v4: uuidv4 } = require('uuid');
 
 const TABLE_NAME = 'PatientReminders';
 
-const addReminder = async (userId, title, time) => {
+const addReminder = async (patientId, title, time) => {
   const reminder = {
     id: uuidv4(),
-    patientId: userId,
+    patientId: patientId,
     title,
     time,
     createdAt: new Date().toISOString(),
@@ -21,12 +21,12 @@ const addReminder = async (userId, title, time) => {
   return reminder;
 };
 
-const getReminders = async (userId) => {
+const getReminders = async (patientId) => {
   const params = {
     TableName: TABLE_NAME,
     FilterExpression: 'patientId = :pid',
     ExpressionAttributeValues: {
-      ':pid': userId,
+      ':pid': patientId,
     },
   };
 
@@ -34,14 +34,14 @@ const getReminders = async (userId) => {
   return result.Items || [];
 };
 
-const updateReminder = async (userId, id, title, time) => {
+const updateReminder = async (patientId, id, title, time) => {
   const getParams = {
     TableName: TABLE_NAME,
     Key: { id },
   };
 
   const existing = await dynamo.get(getParams).promise();
-  if (!existing.Item || existing.Item.patientId !== userId) return null;
+  if (!existing.Item || existing.Item.patientId !== patientId) return null;
 
   const updateParams = {
     TableName: TABLE_NAME,
@@ -62,14 +62,14 @@ const updateReminder = async (userId, id, title, time) => {
   return result.Attributes;
 };
 
-const deleteReminder = async (userId, id) => {
+const deleteReminder = async (patientId, id) => {
   const getParams = {
     TableName: TABLE_NAME,
     Key: { id },
   };
 
   const data = await dynamo.get(getParams).promise();
-  if (!data.Item || data.Item.patientId !== userId) return null;
+  if (!data.Item || data.Item.patientId !== patientId) return null;
 
   const deleteParams = {
     TableName: TABLE_NAME,

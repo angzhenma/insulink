@@ -7,7 +7,7 @@ const patientLogsRoutes = require('./routes/patientLogs');
 const patientNotesRoutes = require('./routes/patientNotes');
 const patientRemindersRoutes = require('./routes/patientReminders');
 const patientFeedbackRoutes = require('./routes/patientFeedbackRoutes');
-const patientResourcesRoutes = require('./routes/patientResources');
+
 
 dotenv.config(); // Load .env variables
 
@@ -21,7 +21,7 @@ app.use('/api/patient', patientLogsRoutes);
 app.use('/api/patient', patientNotesRoutes);
 app.use('/api/patient', patientRemindersRoutes);
 app.use('/api/patient', patientFeedbackRoutes)
-app.use('/api/patient', patientResourcesRoutes);
+
 
 // Default route
 app.get('/', (req, res) => {

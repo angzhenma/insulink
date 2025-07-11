@@ -1,14 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../aws-config'); // adjust path if needed
+const { dynamo } = require('../aws-config');
 
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '3h';
 
-// ✅ Coach Login
+// Coach Login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// ✅ Coach Register
+// Coach Register
 router.post('/register', async (req, res) => {
   const { fullname, email, password } = req.body;
 

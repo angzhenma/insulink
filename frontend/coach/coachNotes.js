@@ -1,5 +1,5 @@
 const token = localStorage.getItem('coachToken');
-if (!token) window.location.href = '../coachLogin.html';
+if (!token) window.location.href = 'coachLogin.html';
 
 const form = document.getElementById('note-form');
 const tagSelect = document.getElementById('tagIds');
@@ -55,7 +55,7 @@ form.addEventListener('submit', async (e) => {
 
 function logout() {
   localStorage.removeItem('coachToken');
-  window.location.href = '../coachLogin.html';
+  window.location.href = 'coachLogin.html';
 }
 
 loadTags();

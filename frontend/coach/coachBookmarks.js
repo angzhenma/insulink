@@ -1,5 +1,5 @@
 const token = localStorage.getItem('coachToken');
-if (!token) window.location.href = '../coachLogin.html';
+if (!token) window.location.href = 'coachLogin.html';
 
 const form = document.getElementById('bookmark-form');
 const messageEl = document.getElementById('message-el');
@@ -34,5 +34,5 @@ form.addEventListener('submit', async (e) => {
 
 function logout() {
   localStorage.removeItem('coachToken');
-  window.location.href = '../coachLogin.html';
+  window.location.href = 'coachLogin.html';
 }
