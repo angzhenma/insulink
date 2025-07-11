@@ -1,35 +1,55 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
 const { dynamo } = require('../aws-config');
 const { verifyAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.post('/', verifyAdmin, async (req, res) => {
-    const { name } = req.body;
-    const item = {
-        feedbackTypeId: uuidv4(),
-        name
-    };
-    try {
-        await dynamo.put({
-            TableName: 'FeedbackCategories',
-            Item: item
-        }).promise();
-        res.status(201).json(item);
-    } catch (err) {
-        res.status(500).json({ error: 'Could note create category' })
-    }
+// fetch all feedback entries
+router.get('/', verifyAdmin, async (req, res) => {
+  try {
+    const result = await dynamo.scan({ TableName: 'CoachFeedback' }).promise();
+    res.json(result.Items);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch feedback', details: err });
+  }
 });
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await dynamo.scan({
-            TableName: 'FeebackCategories'
-        }).promise();
-        res.status(200).json(result.Items);
-    } catch (err) {
-        res.status(500).json({ error: 'Could not fetch categories' });
-    }
+// fetch only uncategorized feedback
+router.get('/uncategorized', verifyAdmin, async (req, res) => {
+  try {
+    const result = await dynamo.scan({
+      TableName: 'CoachFeedback',
+      FilterExpression: 'attribute_not_exists(#cat) OR #cat = :empty',
+      ExpressionAttributeNames: { '#cat': 'category' },
+      ExpressionAttributeValues: { ':empty': '' }
+    }).promise();
+
+    res.json(result.Items);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch uncategorized feedback', details: err });
+  }
+});
+
+// update category
+router.post('/update-category', verifyAdmin, async (req, res) => {
+  const { feedbackId, category } = req.body;
+
+  if (!feedbackId || !category) {
+    return res.status(400).json({ error: 'Missing feedbackId or category' });
+  }
+
+  try {
+    await dynamo.update({
+      TableName: 'CoachFeedback',
+      Key: { feedbackId },
+      UpdateExpression: 'SET #category = :val',
+      ExpressionAttributeNames: { '#category': 'category' },
+      ExpressionAttributeValues: { ':val': category }
+    }).promise();
+
+    res.json({ message: 'Category updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update category', details: err });
+  }
 });
 
 module.exports = router;
