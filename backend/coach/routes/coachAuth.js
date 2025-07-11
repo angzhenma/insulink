@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Coach Register
+// Coach Registers
 router.post('/register', async (req, res) => {
   const { fullname, email, password } = req.body;
 
