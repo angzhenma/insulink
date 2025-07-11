@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const token = localStorage.getItem('adminToken');
 const form = document.getElementById('announcement-form');
 const messageEl = document.getElementById('message');

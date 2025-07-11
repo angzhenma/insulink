@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const express = require('express');
 const { dynamo } = require('../aws-config');
 const { verifyAdmin } = require('../middleware/authMiddleware');

@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const AWS = require('aws-sdk');
 require('dotenv').config({ path: '../.env' });
 

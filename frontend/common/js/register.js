@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 

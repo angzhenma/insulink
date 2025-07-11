@@ -1,5 +1,7 @@
-const jwt = require('jsonwebtoken');
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
 
+const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 
 function verifyToken(req, res, next, allowedRole) {
