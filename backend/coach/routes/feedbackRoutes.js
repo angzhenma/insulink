@@ -4,11 +4,11 @@ const dynamoDB = require('../aws-config');
 
 const TABLE_NAME = 'CoachFeedback';
 
-// ✅ Send feedback
+// Send feedback
 router.post('/', async (req, res) => {
   const { feedbackId, message, patientId } = req.body;
 
-  // ✅ Get coach ID from JWT token (attached by verifyCoach middleware)
+  // Get coach ID from JWT token (attached by verifyCoach middleware)
   const coachId = req.user.email || req.user.sub; 
 
   if (!feedbackId || !message || !patientId || !coachId) {
