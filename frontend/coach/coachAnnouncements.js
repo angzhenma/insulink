@@ -38,7 +38,7 @@ async function fetchAnnouncements() {
 
 function logout() {
   localStorage.removeItem('coachToken');
-  window.location.href = '../coachLogin.html';
+  window.location.href = 'coachLogin.html';
 }
 
 fetchAnnouncements();

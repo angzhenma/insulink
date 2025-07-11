@@ -55,7 +55,7 @@ form.addEventListener('submit', async (e) => {
 
 function logout() {
   localStorage.removeItem('coachToken');
-  window.location.href = '../coachLogin.html';
+  window.location.href = 'coachLogin.html';
 }
 
 loadTags();
