@@ -49,7 +49,7 @@ async function addReminder() {
     return;
   }
 
-  const res = await fetch('http://localhost:3000/api/patient/reminders', {
+  const res = await fetch('http://54.82.37.85:5001/api/patient/reminders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ async function addReminder() {
 }
 
 async function deleteReminder(id) {
-  const res = await fetch(`http://localhost:3000/api/patient/reminders/${id}`, {
+  const res = await fetch(`http://54.82.37.85:5001/api/patient/reminders/${id}`, {
     method: 'DELETE',
     headers: {
       'Authorization': 'Bearer ' + token
@@ -85,7 +85,7 @@ function editReminder(reminder) {
   const newTime = prompt('Edit time (HH:MM):', reminder.time);
   if (!newTitle || !newTime) return;
 
-  fetch(`http://localhost:3000/api/patient/reminders/${reminder.id}`, {
+  fetch(`http://54.82.37.85:5001/api/patient/reminders/${reminder.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

@@ -41,7 +41,7 @@
         const physicalActivity = document.getElementById('physicalActivity').value;
         const token = localStorage.getItem('token');
 
-        fetch('http://localhost:3000/api/patient/log', {
+        fetch('http://54.82.37.85:5001/api/patient/log', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
