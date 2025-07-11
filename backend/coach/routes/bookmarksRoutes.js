@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const dynamoDB = require('../aws-config');
+const { verifyCoach } = require('../middleware/authMiddleware');
 
-//DynamoDB table name
+// DynamoDB table name
 const TABLE_NAME = 'CoachBookmarks';
 
 // Add new bookmark
-router.post('/', async (req, res) => {
-  const { bookmarkId, title, url, coachId } = req.body;
+router.post('/', verifyCoach, async (req, res) => {
+  const { bookmarkId, title, url } = req.body;
 
-  // Check all fields
+  // Get coachId from JWT token
+  const coachId = req.user.coachId || req.user.email;
+
   if (!bookmarkId || !title || !url || !coachId) {
     return res.status(400).json({ error: 'All fields are required (bookmarkId, title, url, coachId)' });
   }
@@ -34,7 +37,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get all bookmarks
-router.get('/', async (req, res) => {
+router.get('/', verifyCoach, async (req, res) => {
   const params = {
     TableName: TABLE_NAME,
   };
