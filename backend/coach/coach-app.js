@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' }); //Loading env variables
+require('dotenv').config({ path: '../.env' }); // Loading env variables
 const express = require('express');
 const cors = require('cors');
 
@@ -17,17 +17,19 @@ const feedbackRoutes = require('./routes/feedbackRoutes');
 const bookmarksRoutes = require('./routes/bookmarksRoutes');
 const notesRoutes = require('./routes/notesRoutes');
 const tagsRoutes = require('./routes/tagsRoutes');
+const coachAnnouncementsRoutes = require('./routes/coachAnnouncements');
 
 // Login & register route for coach
 const coachAuthRoutes = require('./routes/coachAuth');
 app.use('/api/coach', coachAuthRoutes);
 
-//Protect routes with JWT verifyCoach middleware
+// Protect routes with JWT verifyCoach middleware
 app.use('/api/logs', verifyCoach, logsRoutes);
 app.use('/api/feedback', verifyCoach, feedbackRoutes);
 app.use('/api/bookmarks', verifyCoach, bookmarksRoutes);
 app.use('/api/notes', verifyCoach, notesRoutes);
 app.use('/api/tags', verifyCoach, tagsRoutes);
+app.use('/api/coach/announcements', verifyCoach, coachAnnouncementsRoutes);
 
 // Root route
 app.get('/', (req, res) => {

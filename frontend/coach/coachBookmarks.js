@@ -9,7 +9,6 @@ form.addEventListener('submit', async (e) => {
   const bookmarkId = document.getElementById('bookmarkId').value.trim();
   const title = document.getElementById('title').value.trim();
   const url = document.getElementById('url').value.trim();
-  const coachId = document.getElementById('userId').value.trim();
 
   try {
     const res = await fetch('http://localhost:3000/api/bookmarks', {
@@ -18,7 +17,7 @@ form.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({ bookmarkId, title, url, coachId })
+      body: JSON.stringify({ bookmarkId, title, url })
     });
 
     const result = await res.json();

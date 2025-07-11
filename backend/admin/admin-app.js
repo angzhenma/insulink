@@ -7,14 +7,12 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-const resources = require('./routes/adminResources');
 const announcements = require('./routes/adminAnnouncements');
 const feedbackTypes = require('./routes/adminFeedbackTypes');
 const adminLogs = require('./routes/adminLogs');
 const adminAuth = require('./routes/adminAuth');
 const adminRequests = require('./routes/adminRequests');
 
-app.use('/api/resources', resources);
 app.use('/api/announcements', announcements);
 app.use('/api/feedback-types', feedbackTypes);
 app.use('/api/admin-logs', adminLogs);
