@@ -306,3 +306,62 @@ h2 {
 .announcement-list li {
   margin-bottom: 0.75rem;
 }
+
+.welcome-panel {
+  background-color: #ffffff;
+  padding: 2rem 2rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  text-align: left;
+}
+
+.welcome-panel h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.welcome-sub {
+  font-size: 1rem;
+  color: #555;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background-color: #d32f2f;
+  color: white;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 0.75rem;
+  text-align: center;
+}

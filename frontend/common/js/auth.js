@@ -22,13 +22,20 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       const data = await res.json();
 
       if (res.ok && data.token) {
-        localStorage.setItem(`token`, data.token);
+        // store token and user info
+        localStorage.setItem('token', data.token);
         localStorage.setItem('role', role);
         localStorage.setItem('userEmail', email);
         localStorage.setItem(`${role}Token`, data.token);
 
+        // store fullname
+        if (data.fullname) {
+          localStorage.setItem('fullname', data.fullname);
+        }
+
         console.log(`Logged in as ${role}`);
 
+        // redirect to correct dashboard
         const dashboardPages = {
           admin: 'admin/adminDashboard.html',
           coach: 'coach/coachDashboard.html',
