@@ -7,21 +7,38 @@
   <link rel="stylesheet" href="css/patient.css" />
 </head>
 <body>
+
   <div class="container">
-    <h2>Weekly Health Summary</h2>
+    <h1>Weekly Health Summary</h1>
+
+    <div id="status" class="message">Loading summary...</div>
 
     <div class="summary-card" id="summary-card" style="display: none;">
-      <div class="summary-item"><span class="label">Average Glucose:</span> <span id="avg-glucose"></span> mmol/L</div>
-      <div class="summary-item"><span class="label">Activity Sessions:</span> <span id="activity-sessions"></span></div>
-      <div class="summary-item"><span class="label">Meals Logged:</span> <span id="meals-logged"></span></div>
-      <div class="summary-item"><span class="label">Total Logs:</span> <span id="total-logs"></span></div>
+      <div class="summary-item">
+        <span class="label">Average Glucose:</span>
+        <span id="avg-glucose"></span> mmol/L
+      </div>
+      <div class="summary-item">
+        <span class="label">Activity Sessions:</span>
+        <span id="activity-sessions"></span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Meals Logged:</span>
+        <span id="meals-logged"></span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Total Logs:</span>
+        <span id="total-logs"></span>
+      </div>
     </div>
 
-    <div class="error" id="error-message"></div>
+    <div id="error-message" class="error"></div>
 
-    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+    <div class="footer">
+      <a href="patient-dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
   </div>
 
-  <script src="js/view-weeklysummary.js"></script>
+  <script src="view-weeklysummary.js"></script>
 </body>
 </html>

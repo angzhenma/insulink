@@ -1,31 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Submit Health Log</title>
-  <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8">
+    <title>Submit Daily Health Log</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="css/patient.css" />
+
 </head>
 <body>
-  <div class="container">
+
+<div class="container">
     <h1>Submit Daily Health Log</h1>
 
     <form id="healthLogForm">
-      <input type="number" step="0.1" id="bloodGlucose" placeholder="Blood Glucose Level (mmol/L)" required />
+        <label for="bloodGlucose">Blood Glucose Level (mmol/L)</label>
+        <input type="text" id="bloodGlucose" name="bloodGlucose" required>
 
-      <textarea id="foodIntake" rows="3" placeholder="Food Intake" required></textarea>
+        <label for="foodIntake">Food Intake</label>
+        <textarea id="foodIntake" name="foodIntake" required></textarea>
 
-      <textarea id="physicalActivity" rows="3" placeholder="Physical Activity" required></textarea>
+        <label for="physicalActivity">Physical Activity</label>
+        <textarea id="physicalActivity" name="physicalActivity" required></textarea>
 
-      <button type="submit" class="button">Submit Log</button>
-
-      <div class="message" id="responseMsg"></div>
+        <div class="footer">
+            <a href="patient-dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+            <button type="submit" class="btn btn-primary">Submit Log</button>
+        </div>
     </form>
-    <button onclick="goToDashboard()" class="logout">← Back to Dashboard</button>
-  </div>
 
-  <script src="../js/submitHealthLog.js"></script>
-  
-  <script> function goToDashboard() {window.location.href = 'patient-dashboard.html';}</script>
+    <div id="status"></div>
+</div>
+
+<script>
+    document.getElementById('healthLogForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const bloodGlucose = document.getElementById('bloodGlucose').value;
+        const foodIntake = document.getElementById('foodIntake').value;
+        const physicalActivity = document.getElementById('physicalActivity').value;
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:3000/api/patient/log', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                bloodGlucose,
+                foodIntake,
+                physicalActivity
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not OK");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('status').textContent = 'Health Log Submitted Successfully.';
+            // Clear form
+            document.getElementById('healthLogForm').reset();
+        })
+        .catch(error => {
+            document.getElementById('status').textContent = 'Error submitting health log.';
+            document.getElementById('status').style.color = 'red';
+            console.error('Submission error:', error);
+        });
+    });
+</script>
 
 </body>
 </html>
