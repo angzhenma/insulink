@@ -22,4 +22,4 @@ app.use('/api/admin', adminAuth);
 app.use('/api/admin', adminRequests);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Admin API running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Admin API running on http://54.82.37.85:${PORT}`));

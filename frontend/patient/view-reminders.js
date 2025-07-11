@@ -7,7 +7,7 @@ const successMsg = document.getElementById('success-message');
 
 async function fetchReminders() {
   try {
-    const res = await fetch('http://localhost:3000/api/patient/reminders', {
+    const res = await fetch('http://54.82.37.85:5001/api/patient/reminders', {
       headers: {
         'Authorization': 'Bearer ' + token
       }

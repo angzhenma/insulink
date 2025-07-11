@@ -23,7 +23,12 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   const endpoint = endpointMap[role];
 
   try {
-    const res = await fetch(`http://localhost:3000${endpoint}`, {
+    const baseMap = {
+      admin: 'http://54.82.37.85:3000',
+      coach: 'http://54.82.37.85:4000',
+      patient: 'http://54.82.37.85:5001'
+    };
+    const res = await fetch(`${baseMap[role]}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fullname, email, password })

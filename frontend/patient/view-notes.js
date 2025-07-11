@@ -1,4 +1,4 @@
-const apiBase = 'http://localhost:3000/api/patient/note';
+const apiBase = 'http://54.82.37.85:5001/api/patient/note';
 const token = localStorage.getItem('patientToken');
 const container = document.getElementById('notes-container');
 const noteForm = document.getElementById('note-form');

@@ -10,7 +10,7 @@ form.addEventListener('submit', async (e) => {
   const tagName = document.getElementById('tagName').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/api/tags', {
+    const res = await fetch('http://54.82.37.85:4000/api/tags', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

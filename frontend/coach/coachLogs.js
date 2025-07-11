@@ -5,7 +5,7 @@ const list = document.getElementById('log-list');
 
 async function fetchLogs() {
   try {
-    const res = await fetch('http://localhost:3000/api/logs/patient', {
+    const res = await fetch('http://54.82.37.85:4000/api/logs/patient', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();

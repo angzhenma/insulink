@@ -11,7 +11,7 @@ form.addEventListener('submit', async (e) => {
   const url = document.getElementById('url').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/api/bookmarks', {
+    const res = await fetch('http://54.82.37.85:4000/api/bookmarks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

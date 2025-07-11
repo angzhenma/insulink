@@ -7,7 +7,7 @@ const messageEl = document.getElementById('message-el');
 
 async function loadTags() {
   try {
-    const res = await fetch('http://localhost:3000/api/tags', {
+    const res = await fetch('http://54.82.37.85:4000/api/tags', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (e) => {
   const tagIds = Array.from(tagSelect.selectedOptions).map(opt => opt.value);
 
   try {
-    const res = await fetch('http://localhost:3000/api/notes', {
+    const res = await fetch('http://54.82.37.85:4000/api/notes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

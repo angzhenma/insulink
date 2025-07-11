@@ -3,7 +3,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = {
+    admin: 'http://54.82.37.85:3000',
+    coach: 'http://54.82.37.85:4000',
+    patient: 'http://54.82.37.85:5001'
+  };
 
   const endpoints = {
     admin: `${API_BASE_URL}/api/admin/login`,
