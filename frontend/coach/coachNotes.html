@@ -2,18 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coach – Manage Notes</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app-bar">InsuLink</div>
 
-  <div class="login-wrapper">
-    <div class="login-card">
-      <h2>Create Patient Note</h2>
+  <!-- Top App Bar -->
+  <header class="top-bar" style="background-color: #b30000;">
+    <div class="brand">InsuLink</div>
+  </header>
+
+  <!-- Notes Card -->
+  <main class="login-wrapper">
+    <div class="login-card" style="border-top: 4px solid #b30000;">
+      <h2 style="color: #b30000;">📝 Create Patient Note</h2>
       <form id="note-form">
         <input type="text" id="noteId" placeholder="Note ID" required />
-        <input type="text" id="userId" placeholder="Coach User ID" required />
         <input type="text" id="content" placeholder="Content" required />
         <input type="text" id="patientId" placeholder="Patient ID" required />
 
@@ -25,10 +31,11 @@
       </form>
       <button onclick="logout()" class="logout" style="margin-top: 1rem;">← Back to Dashboard</button>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+    <p>© 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a></p>
   </footer>
 
   <script src="coachNotes.js"></script>
