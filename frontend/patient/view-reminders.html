@@ -7,26 +7,28 @@
   <link rel="stylesheet" href="css/patient.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="container dashboard-container">
+
     <h2>My Reminders</h2>
 
-    <div class="reminder-form">
+    <form class="reminder-form" onsubmit="event.preventDefault(); addReminder();">
       <label for="reminderMessage">Reminder Message</label>
-      <input type="text" id="reminderMessage" placeholder="e.g., Take meds at 9AM" />
+      <input type="text" id="reminderMessage" placeholder="e.g., Take meds at 9AM" required />
 
       <label for="reminderTime">Time</label>
-      <input type="time" id="reminderTime" />
+      <input type="time" id="reminderTime" required />
 
-      <button onclick="addReminder()">Add Reminder</button>
-      <div class="error" id="error-message"></div>
-      <div class="success" id="success-message"></div>
-    </div>
+      <button type="submit" class="btn btn-primary">Add Reminder</button>
+
+      <div id="error-message" class="error" style="display: none;"></div>
+      <div id="success-message" class="success" style="display: none;"></div>
+    </form>
 
     <div class="reminder-list" id="reminderList"></div>
 
-    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+    <div class="footer">
+      <a href="patient-dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
   </div>
 
-  <script src="js/view-reminders.js"></script>
-</body>
-</html>
+  <script src="view-reminders.js"></script>

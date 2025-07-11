@@ -9,7 +9,7 @@ const errorMsg = document.getElementById('error-message');
 
 async function fetchFeedback() {
   try {
-    const response = await fetch('http://localhost:5001/api/patient/feedback', {
+    const response = await fetch('http://localhost:3000/api/patient', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -38,6 +38,7 @@ async function fetchFeedback() {
       container.innerHTML = '<p style="text-align:center;">No feedback found.</p>';
     }
   } catch (err) {
+    errorMsg.style.display = 'block';
     errorMsg.textContent = err.message || 'An unexpected error occurred.';
   }
 }

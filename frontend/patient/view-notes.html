@@ -7,26 +7,31 @@
   <link rel="stylesheet" href="css/patient.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="container dashboard-container">
+
     <h2>My Personal Health Notes</h2>
 
     <form id="note-form">
+      <label for="note-input">New Note</label>
       <textarea id="note-input" rows="3" placeholder="Write your note..." required></textarea>
-      <button type="submit" class="button">Add Note</button>
-      <p id="message"></p>
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add Note</button>
+
+      <div id="message-area">
+        <div id="success-msg" class="success" style="display: none;"></div>
+        <div id="error-msg" class="error" style="display: none;"></div>
+      </div>
     </form>
 
     <hr />
 
-    <div id="success-msg" class="success"></div>
-    <div id="error-msg" class="error"></div>
-
     <h3>Saved Notes</h3>
     <div id="notes-container"></div>
 
-    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+    <div class="footer">
+      <a href="patient-dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
   </div>
 
-  <script src="js/view-notes.js"></script>
+  <script src="view-notes.js"></script>
 </body>
 </html>

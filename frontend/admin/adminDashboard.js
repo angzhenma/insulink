@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 window.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');

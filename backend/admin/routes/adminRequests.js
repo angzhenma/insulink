@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { dynamo } = require('../aws-config');

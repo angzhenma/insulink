@@ -1,6 +1,6 @@
 
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'default_patient_jwt_secret';
+const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 
 function verifyPatient(req, res, next) {
   const authHeader = req.headers.authorization;

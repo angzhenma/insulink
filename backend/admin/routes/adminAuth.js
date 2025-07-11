@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();

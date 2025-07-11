@@ -1,3 +1,6 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 
@@ -60,7 +63,7 @@ async function fetchAdmins() {
   }
 }
 
-// approve an unapproved admin
+// approve
 async function approve(email) {
   try {
     const res = await fetch(`${API_BASE_URL}/api/admin/approve-existing`, {
@@ -84,7 +87,7 @@ async function approve(email) {
   }
 }
 
-// delete unapproved admin
+// delete
 async function removeAdmin(email) {
   try {
     const res = await fetch(`${API_BASE_URL}/api/admin/delete-existing`, {

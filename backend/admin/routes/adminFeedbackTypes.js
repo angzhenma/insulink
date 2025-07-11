@@ -1,9 +1,12 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
+
 const express = require('express');
 const { dynamo } = require('../aws-config');
 const { verifyAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-// fetch all feedback entries
+// fetch all feedback
 router.get('/', verifyAdmin, async (req, res) => {
   try {
     const result = await dynamo.scan({ TableName: 'CoachFeedback' }).promise();
@@ -13,7 +16,7 @@ router.get('/', verifyAdmin, async (req, res) => {
   }
 });
 
-// fetch only uncategorized feedback
+// fetch uncategorized feedback
 router.get('/uncategorized', verifyAdmin, async (req, res) => {
   try {
     const result = await dynamo.scan({

@@ -7,6 +7,7 @@ const patientLogsRoutes = require('./routes/patientLogs');
 const patientNotesRoutes = require('./routes/patientNotes');
 const patientRemindersRoutes = require('./routes/patientReminders');
 const patientFeedbackRoutes = require('./routes/patientFeedbackRoutes');
+const announcementRoutes = require('./routes/patientAnnouncements');
 
 
 dotenv.config(); // Load .env variables
@@ -21,7 +22,7 @@ app.use('/api/patient', patientLogsRoutes);
 app.use('/api/patient', patientNotesRoutes);
 app.use('/api/patient', patientRemindersRoutes);
 app.use('/api/patient', patientFeedbackRoutes)
-
+app.use('/api/patient/announcements', announcementRoutes);
 
 // Default route
 app.get('/', (req, res) => {
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Patient backend running on port ${PORT}...`);
 });

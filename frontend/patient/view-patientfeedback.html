@@ -9,12 +9,19 @@
 <body>
 
   <div class="container">
-    <h2>My Feedback</h2>
-    <div id="feedback-container"></div>
-    <div id="error-message" class="error"></div>
-    <button onclick="window.location.href='patient-dashboard.html'" class="logout">← Back to Dashboard</button>
+    <h1>My Feedback</h1>
+
+    <div id="status" class="message">Loading feedback...</div>
+
+    <div id="feedback-container" style="display: none;"></div>
+    <div id="error-message" class="error" style="display: none;"></div>
+
+    <div class="footer">
+      <a href="patient-dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
+
   </div>
 
-  <script src="js/view-patientfeedback.js"></script>
+  <script src="view-patientfeedback.js"></script>
 </body>
 </html>

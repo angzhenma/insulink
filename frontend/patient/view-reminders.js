@@ -7,7 +7,7 @@ const successMsg = document.getElementById('success-message');
 
 async function fetchReminders() {
   try {
-    const res = await fetch('http://localhost:5001/api/patient/reminders', {
+    const res = await fetch('http://localhost:3000/api/patient/reminders', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -21,7 +21,7 @@ async function fetchReminders() {
         const card = document.createElement('div');
         card.className = 'reminder-card';
         card.innerHTML = `
-          <div><strong>${reminder.time}</strong> – ${reminder.message}</div>
+          <div><strong>${reminder.time}</strong> – ${reminder.title}</div>
           <div class="actions">
             <button class="edit" onclick='editReminder(${JSON.stringify(reminder)})'>Edit</button>
             <button onclick="deleteReminder('${reminder.id}')">Delete</button>
@@ -38,23 +38,23 @@ async function fetchReminders() {
 }
 
 async function addReminder() {
-  const message = document.getElementById('reminderMessage').value.trim();
+  const title = document.getElementById('reminderMessage').value.trim();
   const time = document.getElementById('reminderTime').value.trim();
   errorMsg.textContent = '';
   successMsg.textContent = '';
 
-  if (!message || !time) {
+  if (!title || !time) {
     errorMsg.textContent = 'Both fields are required.';
     return;
   }
 
-  const res = await fetch('http://localhost:5001/api/patient/reminders', {
+  const res = await fetch('http://localhost:3000/api/patient/reminders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     },
-    body: JSON.stringify({ message, time })
+    body: JSON.stringify({ title, time })
   });
 
   const data = await res.json();
@@ -70,7 +70,7 @@ async function addReminder() {
 }
 
 async function deleteReminder(id) {
-  const res = await fetch(`http://localhost:5001/api/patient/reminders/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/patient/reminders/${id}`, {
     method: 'DELETE',
     headers: {
       'Authorization': 'Bearer ' + token
@@ -80,17 +80,17 @@ async function deleteReminder(id) {
 }
 
 function editReminder(reminder) {
-  const newMessage = prompt('Edit message:', reminder.message);
+  const newTitle = prompt('Edit message:', reminder.title);
   const newTime = prompt('Edit time (HH:MM):', reminder.time);
-  if (!newMessage || !newTime) return;
+  if (!newTitle || !newTime) return;
 
-  fetch(`http://localhost:5001/api/patient/reminders/${reminder.id}`, {
+  fetch(`http://localhost:3000/api/patient/reminders/${reminder.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     },
-    body: JSON.stringify({ message: newMessage, time: newTime })
+    body: JSON.stringify({ title: newTitle, time: newTime })
   }).then(res => {
     if (res.ok) fetchReminders();
   });
