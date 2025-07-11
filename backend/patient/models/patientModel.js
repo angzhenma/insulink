@@ -4,22 +4,15 @@ const { dynamo } = require('../aws-config');
 const getPatientByEmail = async (email) => {
   const params = {
     TableName: 'PatientUsers',
-    IndexName: 'EmailIndex',
-    KeyConditionExpression: '#em = :e',
-    ExpressionAttributeNames: {
-      '#em': 'email'
-    },
-    ExpressionAttributeValues: {
-      ':e': email 
-    }
+    Key: { email }
   };
 
   try {
-    const result = await dynamo.query(params).promise();
-    console.log("DynamoDB query result:", result); // 🔍 Add this line
-    return result.Items[0] || null;
+    const result = await dynamo.get(params).promise();
+    console.log("DynamoDB get result:", result);
+    return result.Item || null;
   } catch (error) {
-    console.error("DynamoDB query error:", error); // 🔥 Add error logging too
+    console.error("DynamoDB get error:", error);
     return null;
   }
 };
