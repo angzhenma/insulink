@@ -23,7 +23,7 @@ const coachAnnouncementsRoutes = require('./routes/coachAnnouncements');
 const coachAuthRoutes = require('./routes/coachAuth');
 app.use('/api/coach', coachAuthRoutes);
 
-// Protect routes with JWT verifyCoach middleware
+// Protect routes JWT verifyCoach middleware
 app.use('/api/logs', verifyCoach, logsRoutes);
 app.use('/api/feedback', verifyCoach, feedbackRoutes);
 app.use('/api/bookmarks', verifyCoach, bookmarksRoutes);
