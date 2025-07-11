@@ -9,8 +9,7 @@ async function fetchAnnouncements() {
   try {
     const res = await fetch('http://localhost:3000/api/coach/announcements', {
       headers: {
-        'Authorization': 'Bearer ' + token
-      }
+        'Authorization': 'Bearer ' + token }
     });
 
     const data = await res.json();
@@ -34,11 +33,6 @@ async function fetchAnnouncements() {
     console.error('Error fetching announcements:', err);
     list.innerHTML = '<li>Failed to load announcements.</li>';
   }
-}
-
-function logout() {
-  localStorage.removeItem('coachToken');
-  window.location.href = 'coachLogin.html';
 }
 
 fetchAnnouncements();

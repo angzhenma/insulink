@@ -30,8 +30,3 @@ form.addEventListener('submit', async (e) => {
     messageEl.textContent = 'Error contacting server.';
   }
 });
-
-function logout() {
-  localStorage.removeItem('coachToken');
-  window.location.href = 'coachLogin.html';
-}
