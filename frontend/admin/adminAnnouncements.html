@@ -11,21 +11,23 @@
     <button onclick="logout()" class="logout-btn">Logout</button>
   </header>
 
-  <main class="login-wrapper">
-    <div class="wide-card">
-      <h2>📢 Post Announcement</h2>
-      <form id="announcement-form">
+  <main class="dashboard-wrapper">
+    <section class="section">
+      <h2>📢 Post New Announcement</h2>
+      <form id="announcement-form" class="form-grid">
         <input type="text" id="title" placeholder="Title" required />
         <textarea id="body" placeholder="Announcement body" rows="4" required></textarea>
         <button type="submit">Publish</button>
         <p id="message"></p>
       </form>
+    </section>
 
+    <section class="section">
       <h3>🗂 Existing Announcements</h3>
-      <ul id="announcement-list"></ul>
+      <ul id="announcement-list" class="announcement-list"></ul>
+    </section>
 
-      <a href="adminDashboard.html" class="primary-btn">← Back to Dashboard</a>
-    </div>
+    <a href="adminDashboard.html" class="primary-btn back-btn">← Back to Dashboard</a>
   </main>
 
   <script src="adminAnnouncements.js"></script>

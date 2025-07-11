@@ -11,18 +11,19 @@
     <button onclick="logout()" class="logout-btn">Logout</button>
   </header>
 
-  <main class="login-wrapper">
-    <div class="wide-card">
-      <h2>📁 Upload Educational Resource</h2>
-      <form id="upload-form" enctype="multipart/form-data">
+  <main class="dashboard-wrapper">
+    <section class="section">
+      <h2>📁 Upload New Educational Resource</h2>
+      <form id="upload-form" enctype="multipart/form-data" class="form-grid">
         <input type="text" id="title" placeholder="Resource Title" required />
         <input type="text" id="description" placeholder="Description" required />
         <input type="file" id="file" required />
         <button type="submit">Upload</button>
         <p id="upload-message"></p>
       </form>
-      <a href="adminDashboard.html" class="primary-btn">← Back to Dashboard</a>
-    </div>
+    </section>
+
+    <a href="adminDashboard.html" class="primary-btn back-btn">← Back to Dashboard</a>
   </main>
 
   <script src="adminUpload.js"></script>
