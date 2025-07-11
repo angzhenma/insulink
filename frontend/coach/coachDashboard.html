@@ -4,34 +4,35 @@
   <meta charset="UTF-8" />
   <title>Coach Dashboard – InsuLink</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app-bar">InsuLink</div>
+  <header class="top-bar" style="background-color: #b30000;">
+    <div class="brand">InsuLink</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
 
-  <div class="container">
-    <div class="card">
-      <h1>Welcome back, Coach!</h1>
-
-      <div class="dashboard-buttons">
-        <a href="coachLogs.html" class="button">View Logs</a>
-        <a href="coachFeedback.html" class="button">Send Feedback</a>
-        <a href="coachNotes.html" class="button">Create Notes</a>
-        <a href="viewCoachNotes.html" class="button">View Notes</a>
-        <a href="coachTags.html" class="button">Create Tags</a>
-        <a href="coachBookmarks.html" class="button">Add Bookmark</a>
-        <a href="bookmarksFetch.html" class="button">View Bookmarks</a>
-        <button onclick="logout()" class="logout">Logout</button>
-      </div>
+  <main class="login-wrapper">
+    <div class="wide-card">
+      <h2 id="welcomeMessage">Welcome back, Coach!</h2>
+      <a href="coachLogs.html" class="primary-btn">🩺 View Logs</a>
+      <a href="coachFeedback.html" class="primary-btn">💬 Send Feedback</a>
+      <a href="coachNotes.html" class="primary-btn">📝 Create Notes</a>
+      <a href="viewCoachNotes.html" class="primary-btn">📄 View Notes</a>
+      <a href="coachTags.html" class="primary-btn">🏷️ Create Tags</a>
+      <a href="coachBookmarks.html" class="primary-btn">🔖 Add Bookmark</a>
+      <a href="bookmarksFetch.html" class="primary-btn">📚 View Bookmarks</a>
+      <a href="coachAnnouncements.html" class="primary-btn">📢 View Announcements</a>
     </div>
 
-    <section id="patientLogsSection" class="card">
-      <h2>Recent Patient Logs</h2>
+    <section id="patientLogsSection" class="card" style="margin-top: 2rem;">
+      <h3>Recent Patient Logs</h3>
       <ul id="patientLogsList"></ul>
     </section>
-  </div>
+  </main>
 
   <footer class="footer">
-    © 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a>
+    <p>© 2025 InsuLink | <a href="../privacy.html">Privacy Policy</a></p>
   </footer>
 
   <script src="coachDashboard.js"></script>
