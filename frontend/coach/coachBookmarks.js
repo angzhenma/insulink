@@ -18,7 +18,7 @@ form.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({ bookmarkId, title, url, userId })
+      body: JSON.stringify({ bookmarkId, title, url, coachId })
     });
 
     const result = await res.json();
