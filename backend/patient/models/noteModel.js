@@ -4,10 +4,10 @@ const { v4: uuidv4 } = require('uuid');
 
 const TABLE_NAME = 'PatientNotes';
 
-const addNote = async (userId, content) => {
+const addNote = async (patientId, content) => {
   const note = {
     id: uuidv4(),
-    patientId: userId,
+    patientId: patientId,
     content,
     createdAt: new Date().toISOString(),
   };
@@ -21,12 +21,12 @@ const addNote = async (userId, content) => {
   return note;
 };
 
-const getNotes = async (userId) => {
+const getNotes = async (patientId) => {
   const params = {
     TableName: TABLE_NAME,
     FilterExpression: 'patientId = :pid',
     ExpressionAttributeValues: {
-      ':pid': userId,
+      ':pid': patientId,
     },
   };
 
@@ -34,7 +34,7 @@ const getNotes = async (userId) => {
   return result.Items || [];
 };
 
-const updateNote = async (userId, id, content) => {
+const updateNote = async (patientId, id, content) => {
   const params = {
     TableName: TABLE_NAME,
     Key: { id },
@@ -42,7 +42,7 @@ const updateNote = async (userId, id, content) => {
     ConditionExpression: 'patientId = :pid',
     ExpressionAttributeValues: {
       ':c': content,
-      ':pid': userId,
+      ':pid': patientId,
     },
     ReturnValues: 'ALL_NEW',
   };
@@ -51,14 +51,14 @@ const updateNote = async (userId, id, content) => {
   return result.Attributes;
 };
 
-const deleteNote = async (userId, id) => {
+const deleteNote = async (patientId, id) => {
   const getParams = {
     TableName: TABLE_NAME,
     Key: { id },
   };
 
   const data = await dynamo.get(getParams).promise();
-  if (!data.Item || data.Item.patientId !== userId) return null;
+  if (!data.Item || data.Item.patientId !== patientId) return null;
 
   const deleteParams = {
     TableName: TABLE_NAME,

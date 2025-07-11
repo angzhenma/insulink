@@ -5,12 +5,12 @@ const TABLE_NAME = 'PatientHealthLogs';
 /**
  * Logs a new health entry to DynamoDB.
  */
-const logHealthData = async (userId, logData) => {
+const logHealthData = async (patientId, logData) => {
   const { bloodGlucose, foodIntake, physicalActivity } = logData;
 
   const item = {
     id: uuidv4(),
-    patientId: userId,
+    patientId,
     bloodGlucose,
     foodIntake,
     physicalActivity,
@@ -34,7 +34,7 @@ const getHealthLogs = async (userId) => {
     TableName: TABLE_NAME,
     FilterExpression: 'patientId = :pid',
     ExpressionAttributeValues: {
-      ':pid': userId,
+      ':pid': patientId,
     },
   };
 
