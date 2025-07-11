@@ -1,48 +1,48 @@
-const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../aws-config'); 
-const TABLE_NAME = 'PatientHealthLogs';
+  const { v4: uuidv4 } = require('uuid');
+  const { dynamo } = require('../aws-config'); 
+  const TABLE_NAME = 'PatientHealthLogs';
 
-/**
- * Logs a new health entry to DynamoDB.
- */
-const logHealthData = async (patientId, logData) => {
-  const { bloodGlucose, foodIntake, physicalActivity } = logData;
+  /**
+   * Logs a new health entry to DynamoDB.
+   */
+  const logHealthData = async (patientId, logData) => {
+    const { bloodGlucose, foodIntake, physicalActivity } = logData;
 
-  const item = {
-    id: uuidv4(),
-    patientId,
-    bloodGlucose,
-    foodIntake,
-    physicalActivity,
-    timestamp: new Date().toISOString(),
+    const item = {
+      id: uuidv4(),
+      patientId,
+      bloodGlucose,
+      foodIntake,
+      physicalActivity,
+      timestamp: new Date().toISOString(),
+    };
+
+    const params = {
+      TableName: TABLE_NAME,
+      Item: item,
+    };
+
+    await dynamo.put(params).promise();
+    return item;
   };
 
-  const params = {
-    TableName: TABLE_NAME,
-    Item: item,
+  /**
+   * Retrieves all health logs for the patient.
+   */
+  const getHealthLogs = async (patientId) => {
+    const params = {
+      TableName: TABLE_NAME,
+      FilterExpression: 'patientId = :pid',
+      ExpressionAttributeValues: {
+        ':pid': patientId,
+      },
+    };
+
+    const data = await dynamo.scan(params).promise();
+    return data.Items || [];
   };
 
-  await dynamo.put(params).promise();
-  return item;
-};
-
-/**
- * Retrieves all health logs for the patient.
- */
-const getHealthLogs = async (userId) => {
-  const params = {
-    TableName: TABLE_NAME,
-    FilterExpression: 'patientId = :pid',
-    ExpressionAttributeValues: {
-      ':pid': patientId,
-    },
+  module.exports = {
+    logHealthData,
+    getHealthLogs,
   };
-
-  const data = await dynamo.scan(params).promise();
-  return data.Items || [];
-};
-
-module.exports = {
-  logHealthData,
-  getHealthLogs,
-};
