@@ -9,13 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// routes
 const announcements = require('./routes/adminAnnouncements');
 const feedbackTypes = require('./routes/adminFeedbackTypes');
 const adminAuth = require('./routes/adminAuth');
 const adminRequests = require('./routes/adminRequests');
 
-// Mount routes
+// mount routes
 app.use('/api/announcements', announcements);
 app.use('/api/admin-feedback', feedbackTypes);
 app.use('/api/admin', adminAuth);

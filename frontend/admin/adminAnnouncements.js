@@ -40,7 +40,6 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// Fetch and display announcements
 async function fetchAnnouncements() {
   try {
     const res = await fetch('http://localhost:3000/api/announcements');

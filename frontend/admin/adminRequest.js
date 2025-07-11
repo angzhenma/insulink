@@ -63,7 +63,7 @@ async function fetchAdmins() {
   }
 }
 
-// approve an unapproved admin
+// approve
 async function approve(email) {
   try {
     const res = await fetch(`${API_BASE_URL}/api/admin/approve-existing`, {
@@ -87,7 +87,7 @@ async function approve(email) {
   }
 }
 
-// delete unapproved admin
+// delete
 async function removeAdmin(email) {
   try {
     const res = await fetch(`${API_BASE_URL}/api/admin/delete-existing`, {

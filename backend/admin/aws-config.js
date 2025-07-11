@@ -11,7 +11,7 @@ AWS.config.update({
   region: process.env.AWS_REGION || 'us-east-1'
 });
 
-// initialize DynamoDB client
+// initialize dynamoDB client
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports = { dynamo };

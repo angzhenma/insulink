@@ -27,7 +27,7 @@ function verifyToken(req, res, next, allowedRole) {
   }
 }
 
-// Middleware for each role
+// middleware for each role
 function verifyAdmin(req, res, next) {
   verifyToken(req, res, next, 'admin');
 }

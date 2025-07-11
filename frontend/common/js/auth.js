@@ -27,8 +27,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         localStorage.setItem('role', role);
         localStorage.setItem('userEmail', email);
         localStorage.setItem(`${role}Token`, data.token);
-
-        // store fullname
         if (data.fullname) {
           localStorage.setItem('fullname', data.fullname);
         }
