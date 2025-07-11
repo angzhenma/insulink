@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('token'); // JWT stored after login
-  fetch('/api/patient/announcements', {
+  const token = localStorage.getItem('patientToken'); 
+  fetch('http://localhost:3000/api/patient/announcements', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
