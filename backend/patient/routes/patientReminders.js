@@ -1,15 +1,71 @@
-
- // author: Mohamed Yanaal Iqbal
+// author: Mohamed Yanaal Iqbal
 const express = require('express');
 const router = express.Router();
-const { verifyPatient } = require('../middleware/authMiddleware');
-const reminderController = require('../controllers/reminderController');
+const { verifyPatient } = require('../../shared/middleware/authMiddleware');
+const ReminderModel = require('../models/reminderModel');
 
 router.use(verifyPatient);
+router.post('/reminders', async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const { title, time } = req.body;
 
-router.post('/reminders', reminderController.addReminder);
-router.get('/reminders', reminderController.getReminders);
-router.put('/reminders/:id', reminderController.updateReminder);
-router.delete('/reminders/:id', reminderController.deleteReminder);
+    if (!title || !time) {
+      return res.status(400).json({ error: 'Title and time are required.' });
+    }
+
+    const reminder = await ReminderModel.addReminder(userId, title, time);
+    res.status(201).json({ message: 'Reminder added.', reminder });
+  } catch (err) {
+    console.error('Add reminder error:', err);
+    res.status(500).json({ error: 'Failed to add reminder.' });
+  }
+});
+
+router.get('/reminders', async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const reminders = await ReminderModel.getReminders(userId);
+    res.status(200).json({ reminders });
+  } catch (err) {
+    console.error('Fetch reminders error:', err);
+    res.status(500).json({ error: 'Failed to fetch reminders.' });
+  }
+});
+
+router.put('/reminders/:id', async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const { id } = req.params;
+    const { title, time } = req.body;
+
+    const updated = await ReminderModel.updateReminder(userId, id, title, time);
+    if (!updated) {
+      return res.status(404).json({ error: 'Reminder not found.' });
+    }
+
+    res.status(200).json({ message: 'Reminder updated.', reminder: updated });
+  } catch (err) {
+    console.error('Update reminder error:', err);
+    res.status(500).json({ error: 'Failed to update reminder.' });
+  }
+});
+
+router.delete('/reminders/:id', async (req, res) => {
+  try {
+    const userId = req.user?.sub;
+    const { id } = req.params;
+
+    const deleted = await ReminderModel.deleteReminder(userId, id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Reminder not found.' });
+    }
+
+    res.status(200).json({ message: 'Reminder deleted.' });
+  } catch (err) {
+    console.error('Delete reminder error:', err);
+    res.status(500).json({ error: 'Failed to delete reminder.' });
+  }
+});
 
 module.exports = router;

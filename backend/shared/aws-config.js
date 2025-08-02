@@ -1,7 +1,7 @@
+// author: Ibrahim Azaan Mauroof
+// socials: https://linktr.ee/angzhen
 
- // author: Mohamed Yanaal Iqbal
 const AWS = require('aws-sdk');
-require('dotenv').config();
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -10,7 +10,7 @@ AWS.config.update({
   region: process.env.AWS_REGION || 'us-east-1'
 });
 
+// initialize dynamoDB client
 const dynamo = new AWS.DynamoDB.DocumentClient();
-const s3 = new AWS.S3();
 
-module.exports = { dynamo, s3 };
+module.exports = { dynamo };

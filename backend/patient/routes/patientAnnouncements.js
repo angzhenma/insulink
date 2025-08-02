@@ -1,9 +1,8 @@
-
- // author: Mohamed Yanaal Iqbal
+// author: Mohamed Yanaal Iqbal
 const express = require('express');
 const router = express.Router();
-const { dynamo } = require('../aws-config');
-const { verifyPatient } = require('../middleware/authMiddleware');
+const { dynamo } = require('../../shared/aws-config');
+const { verifyPatient } = require('../../shared/middleware/authMiddleware');
 
 const TABLE_NAME = 'SystemAnnouncements';
 
