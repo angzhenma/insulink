@@ -29,10 +29,10 @@
 //   }
 // });
 
+// module.exports = router;
+
 // author: Ibrahim Azaan Mauroof
 // socials: https://linktr.ee/angzhen
-
-module.exports = router;
 
 const express = require('express');
 const router = express.Router();
