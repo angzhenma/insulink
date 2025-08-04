@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const dynamoDB = require('../aws-config');
-const { verifyCoach } = require('../middleware/authMiddleware');
+const dynamoDB = require('../../shared/aws-config');
+const { verifyCoach } = require('../../shared/middleware/authMiddleware');
 
 // DynamoDB table name
 const TABLE_NAME = 'CoachBookmarks';

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { dynamo } = require('../aws-config');
-const { verifyCoach } = require('../middleware/authMiddleware');
+const { dynamo } = require('../../shared/aws-config');
+const { verifyCoach } = require('../../shared/middleware/authMiddleware');
 
 // Get all announcements
 router.get('/', verifyCoach, async (req, res) => {

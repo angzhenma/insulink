@@ -1,7 +1,7 @@
 
  // author: Mohamed Yanaal Iqbal
 const AWS = require('aws-sdk');
-const { dynamo } = require('../aws-config');
+const { dynamo } = require('../../shared/aws-config');
 
 const getPatientByEmail = async (email) => {
   const params = {

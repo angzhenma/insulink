@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dynamoDB = require('../aws-config');
+const dynamoDB = require('../../shared/aws-config');
 
 const PATIENT_LOGS_TABLE = 'PatientLogs';
 

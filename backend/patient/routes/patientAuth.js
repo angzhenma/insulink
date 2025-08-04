@@ -2,9 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { dynamo } = require('../../shared/aws-config'); // Updated path
-const { v4: uuidv4 } = require('uuid'); // Ensure uuid is installed: npm install uuid
-const { getPatientByEmail } = require('../models/patientModel'); // Model import
+const { dynamo } = require('../../shared/aws-config');
+const { v4: uuidv4 } = require('uuid');
+const { getPatientByEmail } = require('../models/patientModel'); 
 
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '7d';

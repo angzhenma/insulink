@@ -1,7 +1,7 @@
   
  // author: Mohamed Yanaal Iqbal
   const { v4: uuidv4 } = require('uuid');
-  const { dynamo } = require('../aws-config'); 
+  const { dynamo } = require('../../shared/aws-config'); 
   const TABLE_NAME = 'PatientHealthLogs';
 
 

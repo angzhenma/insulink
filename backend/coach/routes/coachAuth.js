@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../aws-config');
+const { dynamo } = require('../../shared/aws-config');
 
 const router = express.Router();
 

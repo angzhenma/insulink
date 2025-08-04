@@ -3,8 +3,8 @@
 
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../aws-config');
-const { verifyAdmin } = require('../middleware/authMiddleware');
+const { dynamo } = require('../../shared/aws-config');
+const { verifyAdmin } = require('../../shared/middleware/authMiddleware');
 const router = express.Router();
 
 router.post('/', verifyAdmin, async (req, res) => {

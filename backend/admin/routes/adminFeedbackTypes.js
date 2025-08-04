@@ -2,8 +2,8 @@
 // socials: https://linktr.ee/angzhen
 
 const express = require('express');
-const { dynamo } = require('../aws-config');
-const { verifyAdmin } = require('../middleware/authMiddleware');
+const { dynamo } = require('../../shared/aws-config');
+const { verifyAdmin } = require('../../shared/middleware/authMiddleware');
 const router = express.Router();
 
 // fetch all feedback
