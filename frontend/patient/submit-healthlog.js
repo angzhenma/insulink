@@ -1,4 +1,3 @@
-
 const token = localStorage.getItem('patientToken');
 const form = document.getElementById('healthLogForm');
 const msg = document.getElementById('responseMsg');
@@ -17,7 +16,7 @@ form.addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch('http://54.82.37.85:3000/api/patient/log', {
+    const res = await fetch(`${API_BASE_URL}/api/patient/log`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,14 +28,14 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (res.ok) {
-      msg.textContent = 'Health Log Submitted Successfully.';
+      msg.textContent = '✅ Health Log Submitted Successfully.';
       msg.style.color = 'green';
       form.reset();
     } else {
       throw new Error(data.error || 'Submission failed.');
     }
   } catch (err) {
-    msg.textContent = 'Error submitting.' + (err.message || 'Unexpected action occured.');
+    msg.textContent = '❌ Error: ' + (err.message || 'Something went wrong.');
     msg.style.color = 'red';
   }
 });

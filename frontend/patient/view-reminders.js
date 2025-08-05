@@ -1,4 +1,3 @@
-
 const token = localStorage.getItem('patientToken');
 if (!token) window.location.href = '../../index.html';
 
@@ -8,7 +7,7 @@ const successMsg = document.getElementById('success-message');
 
 async function fetchReminders() {
   try {
-    const res = await fetch('http://54.82.37.85:5001/api/patient/reminders', {
+    const res = await fetch(`${API_BASE_URL}/api/patient/reminders`, {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -34,7 +33,9 @@ async function fetchReminders() {
     }
 
   } catch (err) {
+    console.error('Error fetching reminders:', err);
     errorMsg.textContent = 'Failed to load reminders.';
+    errorMsg.style.display = 'block';
   }
 }
 
@@ -43,41 +44,56 @@ async function addReminder() {
   const time = document.getElementById('reminderTime').value.trim();
   errorMsg.textContent = '';
   successMsg.textContent = '';
+  errorMsg.style.display = 'none';
+  successMsg.style.display = 'none';
 
   if (!title || !time) {
     errorMsg.textContent = 'Both fields are required.';
+    errorMsg.style.display = 'block';
     return;
   }
 
-  const res = await fetch('http://54.82.37.85:5001/api/patient/reminders', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify({ title, time })
-  });
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/patient/reminders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({ title, time })
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (res.ok) {
-    successMsg.textContent = 'Reminder added.';
-    document.getElementById('reminderMessage').value = '';
-    document.getElementById('reminderTime').value = '';
-    fetchReminders();
-  } else {
-    errorMsg.textContent = data.error || 'Failed to add reminder.';
+    if (res.ok) {
+      successMsg.textContent = 'Reminder added.';
+      successMsg.style.display = 'block';
+      document.getElementById('reminderMessage').value = '';
+      document.getElementById('reminderTime').value = '';
+      fetchReminders();
+    } else {
+      errorMsg.textContent = data.error || 'Failed to add reminder.';
+      errorMsg.style.display = 'block';
+    }
+  } catch (err) {
+    console.error('Add reminder error:', err);
+    errorMsg.textContent = 'Unexpected error occurred.';
+    errorMsg.style.display = 'block';
   }
 }
 
 async function deleteReminder(id) {
-  const res = await fetch(`http://54.82.37.85:5001/api/patient/reminders/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
-  });
-  if (res.ok) fetchReminders();
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/patient/reminders/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    if (res.ok) fetchReminders();
+  } catch (err) {
+    console.error('Delete reminder error:', err);
+  }
 }
 
 function editReminder(reminder) {
@@ -85,7 +101,7 @@ function editReminder(reminder) {
   const newTime = prompt('Edit time (HH:MM):', reminder.time);
   if (!newTitle || !newTime) return;
 
-  fetch(`http://54.82.37.85:5001/api/patient/reminders/${reminder.id}`, {
+  fetch(`${API_BASE_URL}/api/patient/reminders/${reminder.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -94,6 +110,8 @@ function editReminder(reminder) {
     body: JSON.stringify({ title: newTitle, time: newTime })
   }).then(res => {
     if (res.ok) fetchReminders();
+  }).catch(err => {
+    console.error('Edit reminder error:', err);
   });
 }
 

@@ -1,31 +1,27 @@
-
-const apiBase = 'http://54.82.37.85:5001/api/patient/note';
 const token = localStorage.getItem('patientToken');
+if (!token) {
+  window.location.href = '../../index.html';
+}
+
+const API_BASE_URL = window.API_BASE_URL || 'http://54.82.37.85:3000'; // fallback
+const apiBase = `${API_BASE_URL}/api/patient/notes`;
+
 const container = document.getElementById('notes-container');
 const noteForm = document.getElementById('note-form');
 const input = document.getElementById('note-input');
 const errorMsg = document.getElementById('error-msg');
 const successMsg = document.getElementById('success-msg');
 
-if (!token) {
-  window.location.href = '../../index.html';
-}
-
 function setMessage(type, message) {
   successMsg.style.display = 'none';
   errorMsg.style.display = 'none';
 
-  if (type === 'success') {
-    successMsg.textContent = message;
-    successMsg.style.display = 'block';
-  } else {
-    errorMsg.textContent = message;
-    errorMsg.style.display = 'block';
-  }
+  const target = type === 'success' ? successMsg : errorMsg;
+  target.textContent = message;
+  target.style.display = 'block';
 
   setTimeout(() => {
-    successMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
+    target.style.display = 'none';
   }, 4000);
 }
 
@@ -52,15 +48,16 @@ async function fetchNotes() {
   try {
     const res = await fetch(apiBase, {
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': `Bearer ${token}`
       }
     });
+
     const data = await res.json();
 
     if (!res.ok) return setMessage('error', data.error || 'Failed to load notes.');
 
-    if (data.notes && data.notes.length > 0) {
-      data.notes.forEach(note => renderNote(note));
+    if (Array.isArray(data.notes) && data.notes.length > 0) {
+      data.notes.forEach(renderNote);
     } else {
       container.innerHTML = '<p class="no-notes">No notes found.</p>';
     }
@@ -79,10 +76,11 @@ noteForm.addEventListener('submit', async e => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ content })
     });
+
     const data = await res.json();
 
     if (!res.ok) return setMessage('error', data.error || 'Failed to add note.');
@@ -102,9 +100,10 @@ async function deleteNote(id) {
     const res = await fetch(`${apiBase}/${id}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': `Bearer ${token}`
       }
     });
+
     if (res.ok) {
       setMessage('success', 'Note deleted.');
       fetchNotes();
@@ -135,7 +134,7 @@ function editNote(btn) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ content: updatedContent })
     })
@@ -152,6 +151,11 @@ function editNote(btn) {
         setMessage('error', 'Error occurred while updating.');
       });
   }
+}
+
+function logout() {
+  localStorage.removeItem('patientToken');
+  window.location.href = '../../index.html';
 }
 
 fetchNotes();

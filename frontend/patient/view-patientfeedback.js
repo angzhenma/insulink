@@ -10,7 +10,7 @@ const errorMsg = document.getElementById('error-message');
 
 async function fetchFeedback() {
   try {
-    const response = await fetch('http://54.82.37.85:5001/api/patient', {
+    const response = await fetch(`${API_BASE_URL}/api/patient/`, {
       headers: {
         'Authorization': 'Bearer ' + token
       }

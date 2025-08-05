@@ -1,34 +1,82 @@
-
- <!-- author: Mohamed Yanaal Iqbal -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Patient Dashboard</title>
-  <link rel="stylesheet" href="css/patient.css" />
+  <title>Patient Dashboard – InsuLink</title>
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="css/patient.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <div class="container dashboard-container">
+  <!-- Top Bar -->
+  <header class="top-bar" style="background-color: #0066cc;">
+    <div class="brand">InsuLink</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
 
-    <div class="logout-wrapper">
-      <button onclick="logout()" class="logout-compact">Logout</button>
-    </div>
+  <!-- Dashboard Content -->
+  <main class="dashboard-wrapper">
+    <section class="welcome-panel">
+      <h2 id="welcomeMessage">Welcome, Patient</h2>
+      <p class="welcome-sub">Manage your daily health activities and logs here</p>
+    </section>
 
-    <h2>Patient Dashboard</h2>
+    <section class="feature-grid">
 
-    <div class="dashboard-buttons">  
-      <a href="submit-healthlog.html" class="button">Log Daily Health</a>
-      <a href="view-weeklysummary.html" class="button">Weekly Summary</a>
-      <a href="view-notes.html" class="button">My Notes</a>
-      <a href="view-reminders.html" class="button">Reminders</a>
-      <a href="view-patientfeedback.html" class="button">View Feedback</a>
-      <a href="view-announcements.html" class="button">View Announcements</a>
-    </div>
+      <div class="feature-card">
+        <div class="card-header">📝 Log Health</div>
+        <div class="card-body">
+          <a href="submit-healthlog.html" class="primary-btn">Submit Log</a>
+          <p class="card-desc">Track your glucose, meals, and activity.</p>
+        </div>
+      </div>
 
-  </div>
+      <div class="feature-card">
+        <div class="card-header">📊 Weekly Summary</div>
+        <div class="card-body">
+          <a href="view-weeklysummary.html" class="primary-btn">View Summary</a>
+          <p class="card-desc">See a recap of your week’s health data.</p>
+        </div>
+      </div>
 
+      <div class="feature-card">
+        <div class="card-header">🗒️ My Notes</div>
+        <div class="card-body">
+          <a href="view-notes.html" class="primary-btn">Open Notes</a>
+          <p class="card-desc">View and manage your personal health notes.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-header">⏰ Reminders</div>
+        <div class="card-body">
+          <a href="view-reminders.html" class="primary-btn">View Reminders</a>
+          <p class="card-desc">Stay on track with your medication or habits.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-header">💬 Feedback</div>
+        <div class="card-body">
+          <a href="view-patientfeedback.html" class="primary-btn">Check Feedback</a>
+          <p class="card-desc">See what your coach has shared with you.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-header">📢 Announcements</div>
+        <div class="card-body">
+          <a href="view-announcements.html" class="primary-btn">View Announcements</a>
+          <p class="card-desc">Stay updated with system-wide notices.</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="../common/js/config.js"></script>
   <script src="patient-dashboard.js"></script>
 </body>
 </html>

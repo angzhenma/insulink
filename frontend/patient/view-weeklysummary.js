@@ -17,7 +17,7 @@ async function fetchSummary() {
   showMessage('error-message', '', false);
 
   try {
-    const response = await fetch('http://54.82.37.85:5001/api/patient/summary', {
+    const response = await fetch(`${API_BASE_URL}/api/patient/summary`, {
       headers: {
         'Authorization': 'Bearer ' + token
       }

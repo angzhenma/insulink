@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('patientToken'); 
-  fetch('http://54.82.37.85:5001/api/patient/announcements', {
+  fetch(`${API_BASE_URL}/api/patient/api/patient/announcements`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
