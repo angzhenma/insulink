@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('welcomeMessage').innerText = `Welcome back, Admin ${name}`;
 
 
-  const res = await fetch('http://54.82.37.85:3000/api/admin/register-request', {
+  const res = await fetch(`${API_BASE_URL}/api/admin/register-request`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function approve(requestId) {
-  await fetch('http://54.82.37.85:3000/api/admin/register-request/approve', {
+  await fetch(`${API_BASE_URL}/api/admin/register-request/approve`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ requestId })
@@ -52,7 +52,7 @@ async function approve(requestId) {
 }
 
 async function reject(requestId) {
-  await fetch('http://54.82.37.85:3000/api/admin/register-request/reject', {
+  await fetch(`${API_BASE_URL}/api/admin/register-request/reject`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ requestId })

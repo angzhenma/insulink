@@ -3,11 +3,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
-  const API_BASE_URL = {
-    admin: 'http://54.82.37.85:3000',
-    coach: 'http://54.82.37.85:4000',
-    patient: 'http://54.82.37.85:5001'
-  };
+  const API_BASE_URL = 'http://54.82.37.85:3000';
 
   const endpoints = {
     admin: `${API_BASE_URL}/api/admin/login`,
@@ -26,18 +22,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       const data = await res.json();
 
       if (res.ok && data.token) {
-        // store token and user info
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', role);
         localStorage.setItem('userEmail', email);
         localStorage.setItem(`${role}Token`, data.token);
-        if (data.fullname) {
-          localStorage.setItem('fullname', data.fullname);
-        }
+        if (data.fullname) localStorage.setItem('fullname', data.fullname);
 
-        console.log(`Logged in as ${role}`);
-
-        // redirect to correct dashboard
         const dashboardPages = {
           admin: 'admin/adminDashboard.html',
           coach: 'coach/coachDashboard.html',
@@ -48,7 +38,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         return;
       }
     } catch (err) {
-      console.error(`Error trying ${role}:`, err);
+      console.error(`Error logging in as ${role}:`, err);
     }
   }
 

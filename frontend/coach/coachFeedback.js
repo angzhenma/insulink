@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   const patientId = document.getElementById('patientId').value.trim();
 
   try {
-    const res = await fetch('http://54.82.37.85:4000/api/feedback', {
+    const res = await fetch(`${API_BASE_URL}/api/coach/feedback`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

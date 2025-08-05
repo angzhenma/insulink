@@ -17,7 +17,7 @@ form.addEventListener('submit', async (e) => {
   const body = document.getElementById('body').value.trim();
 
   try {
-    const res = await fetch('http://54.82.37.85:3000/api/announcements', {
+    const res = await fetch(`${API_BASE_URL}/api/admin/announcements`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ form.addEventListener('submit', async (e) => {
 
 async function fetchAnnouncements() {
   try {
-    const res = await fetch('http://54.82.37.85:3000/api/announcements');
+    const res = await fetch(`${API_BASE_URL}/api/admin/announcements`);
     const data = await res.json();
 
     list.innerHTML = '';

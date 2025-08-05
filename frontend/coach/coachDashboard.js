@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const list = document.getElementById('patientLogsList');
 
   try {
-    const res = await fetch('http://54.82.37.85:4000/api/logs/patient', {
+    const res = await fetch(`${API_BASE_URL}/api/coach/logs/patient`, {
       headers: { 'Authorization': 'Bearer ' + token }
     });
 

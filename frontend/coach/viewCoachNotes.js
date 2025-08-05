@@ -5,7 +5,7 @@ const list = document.getElementById('notesList');
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('http://54.82.37.85:4000/api/notes', {
+    const res = await fetch(`${API_BASE_URL}/api/coach/notes`, {
       headers: { 'Authorization': 'Bearer ' + token }
     });
 

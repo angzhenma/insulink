@@ -14,8 +14,10 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     return alert('Passwords do not match!');
   }
 
+  const API_BASE_URL = 'http://54.82.37.85:3000';
+
   const endpointMap = {
-    admin: '/api/admin/register-request',
+    admin: '/api/admin/requests/register-request',
     coach: '/api/coach/register',
     patient: '/api/patient/register'
   };
@@ -23,12 +25,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   const endpoint = endpointMap[role];
 
   try {
-    const baseMap = {
-      admin: 'http://54.82.37.85:3000',
-      coach: 'http://54.82.37.85:4000',
-      patient: 'http://54.82.37.85:5001'
-    };
-    const res = await fetch(`${baseMap[role]}${endpoint}`, {
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fullname, email, password })

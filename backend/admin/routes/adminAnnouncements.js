@@ -3,7 +3,7 @@
 
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { dynamo } = require('../../shared/aws-config');
+const { dynamo, sns } = require('../../shared/aws-config');
 const { verifyAdmin } = require('../../shared/middleware/authMiddleware');
 const router = express.Router();
 
@@ -24,11 +24,21 @@ router.post('/', verifyAdmin, async (req, res) => {
             TableName: 'SystemAnnouncements',
             Item: item,
         }).promise();
+
+        const params = {
+            Message: `New system announcement: ${title}\n\n${body}`,
+            Subject: `📢 New System Announcement: ${title}`,
+            TopicArn: process.env.SNS_TOPIC_ARN,
+        };
+
+        const snsResult = await sns.publish(params).promise();
+        console.log("SNS Message published:", snsResult.MessageId);
+
         res.status(201).json(item);
     } catch (err) {
-        console.error('Error creating announcement:', err);
+        console.error('Error creating announcement or publushing SNS message:', err);
         res.status(500).json({
-            error: 'Failed to create announcement'
+            error: 'Failed to create announcement or notify subscribers'
         });
     }
 });

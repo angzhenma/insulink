@@ -7,7 +7,7 @@ if (!token) {
 
 async function fetchAnnouncements() {
   try {
-    const res = await fetch('http://54.82.37.85:4000/api/coach/announcements', {
+    const res = await fetch(`${API_BASE_URL}/api/coach/announcements`, {
       headers: {
         'Authorization': 'Bearer ' + token }
     });

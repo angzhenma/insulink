@@ -3,11 +3,11 @@
 
 const PatientFeedback = require("../models/patientFeedbackModel");
 const {
-    snsClient
+    sns
 } = require("../../shared/aws-config");
-const {
-    PublishCommand
-} = require("@aws-sdk/client-sns");
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // handles patient feedback submission
 const submitFeedback = async (req, res) => {
@@ -39,8 +39,8 @@ const submitFeedback = async (req, res) => {
             TopicArn: process.env.SNS_TOPIC_ARN,
         };
 
-        const command = new PublishCommand(params);
-        const data = await snsClient.send(command);
+        // const command = new PublishCommand(params);
+        const data = await sns.publish(params).promise();
 
         console.log("SNS Message published successfully:", data.MessageId);
 
