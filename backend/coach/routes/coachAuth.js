@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const { dynamo } = require('../../shared/aws-config');
 
@@ -56,18 +57,19 @@ router.post('/register', async (req, res) => {
 
   const coachId = uuidv4();
 
-  const params = {
-    TableName: 'Coaches',
-    Item: {
-      email,
-      fullname,
-      password,
-      coachId,
-      createdAt: new Date().toISOString()
-    }
-  };
-
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const params = {
+      TableName: 'Coaches',
+      Item: {
+        email,
+        fullname,
+        password: hashedPassword,
+        coachId,
+        createdAt: new Date().toISOString()
+      }
+    };
     await dynamo.put(params).promise();
     res.status(201).json({ message: 'Coach registered successfully' });
   } catch (err) {

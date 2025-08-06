@@ -3,6 +3,7 @@
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { dynamo } = require('../../shared/aws-config');
 
@@ -29,7 +30,8 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ error: 'Admin account not approved yet' });
     }
 
-    if (admin.password !== password) {
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+    if (!passwordMatch) {
       return res.status(401).json({ error: 'Incorrect password' });
     }
 

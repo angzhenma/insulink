@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { dynamo } = require('../../shared/aws-config');
 const { v4: uuidv4 } = require('uuid');
-const { getPatientByEmail } = require('../models/patientModel'); 
+const { getPatientByEmail } = require('../models/patientModel');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'insulink_super_secret_key';
 const JWT_EXPIRES_IN = '7d';
@@ -19,7 +20,8 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Patient not found' });
     }
 
-    if (patient.password !== password) {
+    const passwordMatch = await bcrypt.compare(password, patient.password); // 🔥 bcrypt check
+    if (!passwordMatch) {
       return res.status(401).json({ error: 'Incorrect password' });
     }
 
@@ -72,12 +74,14 @@ router.post('/register', async (req, res) => {
     const nextNumber = maxNumber + 1;
     const patientId = `p${nextNumber.toString().padStart(3, '0')}`;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const putParams = {
       TableName: 'Patients',
       Item: {
         email,
         fullname,
-        password,
+        password: hashedPassword,
         patientId,
         createdAt: new Date().toISOString()
       }
