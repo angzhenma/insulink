@@ -15,6 +15,7 @@ insulink-v1/
 │ ├── admin/
 │ ├── coach/
 │ ├── patient/
+├── shared/
 │ ├── middleware/
 
 
@@ -57,7 +58,7 @@ Then open `index.html` in your browser
 ### 📦 Tech Stack
 
 - Node.js + Express
-- AWS DynamoDB + S3
+- AWS DynamoDB + SNS
 - Vanilla JS Frontend
 - JWT Auth
 - Role-Based Access
