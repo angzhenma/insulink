@@ -9,6 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 app.use('/api/admin', require('./admin/routes/adminAuth'));
 app.use('/api/admin/feedback-types', require('./admin/routes/adminFeedbackTypes'));
 app.use('/api/admin/announcements', require('./admin/routes/adminAnnouncements'));
