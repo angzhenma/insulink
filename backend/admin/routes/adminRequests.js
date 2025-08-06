@@ -4,6 +4,7 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { dynamo } = require('../../shared/aws-config');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 // register admin
@@ -14,16 +15,18 @@ router.post('/register-request', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const item = {
-    adminId: uuidv4(),
-    fullname,
-    email,
-    password,
-    approved: false,
-    createdAt: new Date().toISOString()
-  };
-
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const item = {
+      adminId: uuidv4(),
+      fullname,
+      email,
+      password: hashedPassword,
+      approved: false,
+      createdAt: new Date().toISOString()
+    };
+
     await dynamo.put({
       TableName: 'Admins',
       Item: item
