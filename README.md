@@ -19,7 +19,7 @@ insulink-v1/
 │ ├── middleware/
 
 
-## Getting Started (for Team Members)
+## Getting Started
 
 ### Backend Setup
 
@@ -43,7 +43,7 @@ node admin/admin-app.js
 
 ---
 
-### Frontend Preview (optional)
+### Frontend Preview
 
 You can serve the frontend using:
 
@@ -65,7 +65,7 @@ Then open `index.html` in your browser
 
 ---
 
-## ✅ Notes
+## Notes
 
 - Each role’s frontend & backend is self-contained
 - Only `.env.example` is committed for security
