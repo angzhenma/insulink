@@ -1,3 +1,4 @@
+// author: AUWESULLA BAIG
 const express = require('express');
 const router = express.Router();
 const { dynamo } = require('../../shared/aws-config');
