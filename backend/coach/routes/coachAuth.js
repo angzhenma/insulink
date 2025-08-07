@@ -1,3 +1,4 @@
+// author: AUWESULLA BAIG
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -79,3 +80,4 @@ router.post('/register', async (req, res) => {
 });
 
 module.exports = router;
+
