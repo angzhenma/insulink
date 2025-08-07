@@ -1,3 +1,4 @@
+// author: Mohamed Yanaal Iqbal
 const token = localStorage.getItem('patientToken');
 const form = document.getElementById('healthLogForm');
 const msg = document.getElementById('responseMsg');

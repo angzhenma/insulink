@@ -1,4 +1,4 @@
-
+// author: Mohamed Yanaal Iqbal
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('patientToken'); 
   fetch(`${API_BASE_URL}/api/patient/api/patient/announcements`, {
