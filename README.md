@@ -1,9 +1,9 @@
-# 🩺 Insulink – DDAC G7 Group Assignment
+# Insulink – DDAC G7 Group Assignment
 
 This is a cloud-based diabetes support platform with separate role-based systems for Admin, Coach, and Patient.
 Done and developed by Azaan, Auwes and Yanaal.
 
-## 📁 Project Structure
+## Project Structure
 
 insulink-v1/
 ├── frontend/ ← All frontend UIs
@@ -19,9 +19,9 @@ insulink-v1/
 │ ├── middleware/
 
 
-## 🚀 Getting Started (for Team Members)
+## Getting Started (for Team Members)
 
-### 🧱 Backend Setup
+### Backend Setup
 
 1. Clone the repo:
 
@@ -43,7 +43,7 @@ node admin/admin-app.js
 
 ---
 
-### 🌐 Frontend Preview (optional)
+### Frontend Preview (optional)
 
 You can serve the frontend using:
 
@@ -55,7 +55,7 @@ Then open `index.html` in your browser
 
 ---
 
-### 📦 Tech Stack
+### Tech Stack
 
 - Node.js + Express
 - AWS DynamoDB + SNS
