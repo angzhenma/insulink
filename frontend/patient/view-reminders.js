@@ -1,3 +1,4 @@
+// author: Mohamed Yanaal Iqbal
 const token = localStorage.getItem('patientToken');
 if (!token) window.location.href = '../../index.html';
 
