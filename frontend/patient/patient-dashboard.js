@@ -1,3 +1,4 @@
+// author: Mohamed Yanaal Iqbal
 const token = localStorage.getItem('patientToken');
 const fullname = localStorage.getItem('fullname');
 
