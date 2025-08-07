@@ -1,3 +1,4 @@
+// author: AUWESULLA BAIG
 const express = require('express');
 const router = express.Router();
 const dynamoDB = require('../../shared/aws-config');
@@ -35,3 +36,4 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
+
